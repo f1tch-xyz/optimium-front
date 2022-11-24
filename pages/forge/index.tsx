@@ -1,16 +1,16 @@
-import BigNumber from 'bignumber.js'
-import React, { useEffect, useState } from 'react'
-import { ESD, ESDS, USDC } from '../../constants/tokens';
-import { getPoolAddress } from '../../utils/pool'
-import { getBalanceBonded, getBalanceOfStaged, getFluidUntil, getLockedUntil, getStats, getStatusOf, getTokenAllowance, getTokenBalance, getTokenTotalSupply } from '../../utils/infura';
-import styles from './Wallet.module.scss'
-import { delineate, toTokenUnitsBN } from '../../utils/number';
-import { DollarPool4 } from '../../constants/contracts';
-import { DAO_EXIT_LOCKUP_EPOCHS } from '../../constants/values';
-import AccountPageHeader from './Header';
 import Box from '@mui/material/Box';
-import WithdrawDeposit from './WithdrawDeposit';
+import BigNumber from 'bignumber.js';
+import { useEffect, useState } from 'react';
+import { DollarPool4 } from '../../constants/contracts';
+import { ESD, ESDS, USDC } from '../../constants/tokens';
+import { DAO_EXIT_LOCKUP_EPOCHS } from '../../constants/values';
+import { getBalanceBonded, getBalanceOfStaged, getFluidUntil, getLockedUntil, getStats, getStatusOf, getTokenAllowance, getTokenBalance, getTokenTotalSupply } from '../../utils/infura';
+import { delineate, toTokenUnitsBN } from '../../utils/number';
+import { getPoolAddress } from '../../utils/pool';
 import BondUnbond from './BondUnbond';
+import AccountPageHeader from './Header';
+import styles from './Wallet.module.scss';
+import WithdrawDeposit from './WithdrawDeposit';
 
 const Forge = ({ user }: { user: string }) => {
 

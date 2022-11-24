@@ -5,6 +5,7 @@ import NavBar from '../components/NavBar/NavBar';
 import Link from 'next/link'
 import { Route, Router, Routes } from 'react-router-dom';
 import Forge from './forge';
+import Liquidity from './liquidity';
 
 const Home: NextPage = () => {
 
@@ -14,7 +15,7 @@ const Home: NextPage = () => {
   return (
     <>
       <NavBar hasWeb3={hasWeb3} user={user} setUser={setUser} />
-      <Forge user={user} />
+      <Liquidity user={user} />
     </>
   );
 };

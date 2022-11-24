@@ -1,10 +1,8 @@
-import React from 'react'
-import BigNumber from 'bignumber.js'
-
+import BigNumber from 'bignumber.js';
 import { BalanceBlock } from '../../components/common';
-import TextBlock from '../../components/common/TextBlock'
-import { ownership } from '../../utils/number'
-import styles from './Wallet.module.scss'
+import TextBlock from '../../components/common/TextBlock';
+import { ownership } from '../../utils/number';
+import styles from './Wallet.module.scss';
 
 type AccountPageHeaderProps = {
     accountESDBalance: BigNumber

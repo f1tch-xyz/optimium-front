@@ -1,24 +1,34 @@
+import React, { useState } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import BigNumber from 'bignumber.js';
-import { useState } from 'react';
-import { BalanceBlock, BigNumberInput, MaxButton } from '../../components/common';
-import { ESD, ESDS } from '../../constants/tokens';
-import { isPos, toBaseUnitBN } from '../../utils/number';
-import { bond, unbondUnderlying } from '../../utils/web';
-import styles from './Wallet.module.scss';
+
+import BigNumber from 'bignumber.js'
+import { isPos, toBaseUnitBN } from '../../utils/number'
+import { UNI } from '../../constants/tokens'
+import styles from './Pool.module.scss'
+import Box from '@mui/material/Box'
+import BalanceBlock from '../../components/common/BalanceBlock'
+import BigNumberInput from '../../components/common/BigNumberInput'
+import MaxButton from '../../components/common/MaxButton'
+import Button from '@mui/material/Button'
+import { bondPool, unbondPool } from '../../utils/web';
 
 type BondUnbondProps = {
+    poolAddress: string
     staged: BigNumber
     bonded: BigNumber
     status: number
     lockup: number
 }
 
-function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
+function BondUnbond({
+    poolAddress,
+    staged,
+    bonded,
+    status,
+    lockup,
+}: BondUnbondProps) {
     const [bondAmount, setBondAmount] = useState(new BigNumber(0))
     const [unbondAmount, setUnbondAmount] = useState(new BigNumber(0))
 
@@ -26,18 +36,19 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
         <Box className={styles.box_custom_style}>
             <div className={styles.wrapper}>
                 {/* Total bonded */}
+
                 <div style={{ display: 'flex' }}>
                     <div style={{ whiteSpace: 'nowrap' }}>
-                        <BalanceBlock asset="Bonded" balance={bonded} suffix={'T'} />
+                        <BalanceBlock asset="Bonded" balance={bonded} suffix={'T-3CRV'} />
                     </div>
                 </div>
                 <div className={styles.button_wrapper}>
-                    {/* Bond Døllar within DAO */}
+                    {/* Bond UNI-V2 within Pool */}
                     <div style={{ display: 'flex' }}>
                         <div style={{ width: '60%', minWidth: '6em' }}>
                             <>
                                 <BigNumberInput
-                                    adornment="T"
+                                    adornment="T-3CRV"
                                     value={bondAmount}
                                     setter={setBondAmount}
                                 />
@@ -52,24 +63,24 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
                             <Button
                                 startIcon={status === 0 ? <AddIcon /> : <WarningAmberIcon />}
                                 onClick={() => {
-                                    bond(ESDS.addr, toBaseUnitBN(bondAmount, ESD.decimals))
+                                    bondPool(
+                                        poolAddress,
+                                        toBaseUnitBN(bondAmount, UNI.decimals),
+                                        (hash: any) => setBondAmount(new BigNumber(0))
+                                    )
                                 }}
-                                disabled={
-                                    status === 2 ||
-                                    !isPos(bondAmount) ||
-                                    bondAmount.isGreaterThan(staged)
-                                }>
+                                disabled={poolAddress === '' || !isPos(bondAmount)}>
                                 Bond
                             </Button>
                         </div>
                     </div>
-                    <div style={{ width: '2%' }} />
-                    {/* Unbond Døllar within DAO */}
+                    <div style={{ flexBasis: '2%' }} />
+                    {/* Unbond UNI-V2 within Pool */}
                     <div style={{ display: 'flex' }}>
                         <div style={{ width: '60%', minWidth: '6em' }}>
                             <>
                                 <BigNumberInput
-                                    adornment="T"
+                                    adornment="T-3CRV"
                                     value={unbondAmount}
                                     setter={setUnbondAmount}
                                 />
@@ -84,16 +95,13 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
                             <Button
                                 startIcon={status === 0 ? <RemoveIcon /> : <WarningAmberIcon />}
                                 onClick={() => {
-                                    unbondUnderlying(
-                                        ESDS.addr,
-                                        toBaseUnitBN(unbondAmount, ESD.decimals)
+                                    unbondPool(
+                                        poolAddress,
+                                        toBaseUnitBN(unbondAmount, UNI.decimals),
+                                        (hash: any) => setUnbondAmount(new BigNumber(0))
                                     )
                                 }}
-                                disabled={
-                                    status === 2 ||
-                                    !isPos(unbondAmount) ||
-                                    unbondAmount.isGreaterThan(bonded)
-                                }>
+                                disabled={poolAddress === '' || !isPos(unbondAmount)}>
                                 Unbond
                             </Button>
                         </div>
