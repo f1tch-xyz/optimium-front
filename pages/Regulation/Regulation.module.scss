@@ -1,0 +1,48 @@
+
+.history_wrapper {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    align-items: center;
+}
+
+.history_content {
+    margin-right: 2%;
+}
+
+.history_content:last-child {
+    margin-right: 0;
+}
+
+.history_box {
+    width: 100%;
+    border-radius: 0px !important;
+    border: 1px solid;
+}
+
+.data_view {}
+
+@media (max-width:767px) {
+    .history_content {
+        margin: 0 15px 15px 15px;
+    }
+
+    .history_content:last-child {
+        margin: 0 15px 0 15px;
+    }
+
+    .history_wrapper {
+        grid-template-columns: 100%;
+    }
+
+    .data_view {
+        margin: 0 15px 0 15px;
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 0 1px;
+        color: #212B36;
+    }
+}
+
+.multiprogress_distribution {
+    border-radius: 0px;
+}

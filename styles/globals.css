@@ -14,3 +14,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.multiprogress-distribution {
+  border-radius: 0px!important;
+}
+
+.multiprogress-distribution > * > * {
+  border-radius: 0px!important;
+}

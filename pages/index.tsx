@@ -4,8 +4,9 @@ import HomePage from '../components/HomePage/HomePage';
 import NavBar from '../components/NavBar/NavBar';
 import Link from 'next/link'
 import { Route, Router, Routes } from 'react-router-dom';
-import Forge from './forge';
-import Liquidity from './liquidity';
+import Forge from './Forge';
+import Pool from './Pool';
+import Regulation from './Regulation';
 
 const Home: NextPage = () => {
 
@@ -15,7 +16,8 @@ const Home: NextPage = () => {
   return (
     <>
       <NavBar hasWeb3={hasWeb3} user={user} setUser={setUser} />
-      <Liquidity user={user} />
+      {/* <Pool user={user} /> */}
+      <Regulation user={user} />
     </>
   );
 };

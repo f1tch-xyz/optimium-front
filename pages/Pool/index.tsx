@@ -15,7 +15,7 @@ import styles from './Pool.module.scss';
 import Provide from './Provide';
 import WithdrawDeposit from './WithdrawDeposit';
 
-const Liquidity = ({ user }: { user: string }) => {
+const Pool = ({ user }: { user: string }) => {
 
     const { override } = useParams();
     if (override) {
@@ -294,4 +294,4 @@ const Liquidity = ({ user }: { user: string }) => {
     )
 }
 
-export default Liquidity;
+export default Pool;
