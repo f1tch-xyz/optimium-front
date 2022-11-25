@@ -608,7 +608,7 @@ export const getInstantaneousPrice = async () => {
       exchange.get_dy(0, 1, parseEther("1"), [0, 0]),
     ]);
 
-    const price = toTokenUnitsBN(threeCRVPrice, USDC.decimals).multipliedBy(
+    const price = toTokenUnitsBN(threeCRVPrice, USDC.decimals)?.multipliedBy(
       toTokenUnitsBN(TPrice, USDC.decimals)
     );
     return price;

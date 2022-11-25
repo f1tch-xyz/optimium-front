@@ -42,24 +42,11 @@ const RegulationHeader = ({
     totalCouponsUnderlying,
     couponPremium,
 }: RegulationHeaderProps) => {
-    const daoTotalSupply = totalBonded.plus(totalStaged).plus(totalRedeemable);
-    const poolTotalSupply = poolLiquidity.plus(poolRewarded).plus(poolClaimable);
-    const legacyPoolTotalSupply = legacyPoolRewarded.plus(legacyPoolClaimable);
-    const circulatingSupply = totalSupply
-        .minus(daoTotalSupply)
-        .minus(poolTotalSupply)
-        .minus(legacyPoolTotalSupply);
-    // console.log(
-    //   totalSupply,
-    //   totalBonded,
-    //   totalStaged,
-    //   totalRedeemable,
-    //   poolLiquidity,
-    //   poolRewarded,
-    //   poolClaimable,
-    //   legacyPoolRewarded,
-    //   legacyPoolClaimable
-    // )
+    const daoTotalSupply = totalBonded?.plus(totalStaged).plus(totalRedeemable);
+    const poolTotalSupply = poolLiquidity?.plus(poolRewarded).plus(poolClaimable);
+    const legacyPoolTotalSupply = legacyPoolRewarded?.plus(legacyPoolClaimable);
+    const circulatingSupply = totalSupply?.minus(daoTotalSupply).minus(poolTotalSupply).minus(legacyPoolTotalSupply);
+
     return (
         <>
             <div className={styles.history_wrapper}>
@@ -68,25 +55,19 @@ const RegulationHeader = ({
                         className={styles.history_box}>
                         Supply allocation
                         <Distribution
-                            heading={`T ${formatMoney(totalSupply.toNumber())}`}
+                            heading={`T ${formatMoney(totalSupply?.toNumber())}`}
                             items={[
                                 {
                                     item: 'Forge',
-                                    percentage: +ownership(daoTotalSupply, totalSupply)
-                                        .toNumber()
-                                        .toFixed(2),
+                                    percentage: +ownership(daoTotalSupply, totalSupply)?.toNumber().toFixed(2),
                                 },
                                 {
                                     item: 'Pool',
-                                    percentage: +ownership(poolTotalSupply, totalSupply)
-                                        .toNumber()
-                                        .toFixed(2),
+                                    percentage: +ownership(poolTotalSupply, totalSupply)?.toNumber().toFixed(2),
                                 },
                                 {
                                     item: 'Circulating',
-                                    percentage: +ownership(circulatingSupply, totalSupply)
-                                        .toNumber()
-                                        .toFixed(2),
+                                    percentage: +ownership(circulatingSupply, totalSupply)?.toNumber().toFixed(2),
                                 },
                             ]}
                         />
@@ -97,25 +78,19 @@ const RegulationHeader = ({
                         className={styles.history_box}>
                         Forge breakdown
                         <Distribution
-                            heading={`T ${formatMoney(daoTotalSupply.toNumber())}`}
+                            heading={`T ${formatMoney(daoTotalSupply?.toNumber())}`}
                             items={[
                                 {
                                     item: 'Bonded',
-                                    percentage: +ownership(totalBonded, daoTotalSupply)
-                                        .toNumber()
-                                        .toFixed(2),
+                                    percentage: +ownership(totalBonded, daoTotalSupply)?.toNumber().toFixed(2),
                                 },
                                 {
                                     item: 'Staged',
-                                    percentage: +ownership(totalStaged, daoTotalSupply)
-                                        .toNumber()
-                                        .toFixed(2),
+                                    percentage: +ownership(totalStaged, daoTotalSupply)?.toNumber().toFixed(2),
                                 },
                                 {
                                     item: 'Redeemable',
-                                    percentage: +ownership(totalRedeemable, daoTotalSupply)
-                                        .toNumber()
-                                        .toFixed(2),
+                                    percentage: +ownership(totalRedeemable, daoTotalSupply)?.toNumber().toFixed(2),
                                 },
                             ]}
                         />
@@ -126,25 +101,19 @@ const RegulationHeader = ({
                         className={styles.history_box}>
                         Pool breakdown
                         <Distribution
-                            heading={`T ${formatMoney(poolTotalSupply.toNumber())}`}
+                            heading={`T ${formatMoney(poolTotalSupply?.toNumber())}`}
                             items={[
                                 {
                                     item: 'Liquidity',
-                                    percentage: +ownership(poolLiquidity, poolTotalSupply)
-                                        .toNumber()
-                                        .toFixed(2),
+                                    percentage: +ownership(poolLiquidity, poolTotalSupply)?.toNumber().toFixed(2),
                                 },
                                 {
                                     item: 'Rewarded',
-                                    percentage: +ownership(poolRewarded, poolTotalSupply)
-                                        .toNumber()
-                                        .toFixed(2),
+                                    percentage: +ownership(poolRewarded, poolTotalSupply)?.toNumber().toFixed(2),
                                 },
                                 {
                                     item: 'Claimable',
-                                    percentage: +ownership(poolClaimable, poolTotalSupply)
-                                        .toNumber()
-                                        .toFixed(2),
+                                    percentage: +ownership(poolClaimable, poolTotalSupply)?.toNumber().toFixed(2),
                                 },
                             ]}
                         />
