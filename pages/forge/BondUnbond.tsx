@@ -23,7 +23,7 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
     const [unbondAmount, setUnbondAmount] = useState(new BigNumber(0))
 
     return (
-        <Box height={165} border={'1px solid black'} className={styles.box_custom_style}>
+        <Box height={185} border={'1px solid black'} className={styles.box_custom_style}>
             <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
                 FORGE
             </Box>
@@ -35,11 +35,12 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
                             <BalanceBlock asset="Bonded" balance={bonded} suffix={'T'} />
                         </div>
                     </div>
-                    <div className={styles.button_wrapper}>
-                        {/* Bond Døllar within DAO */}
-                        <div style={{ display: 'flex' }}>
-                            <div style={{ width: '60%', minWidth: '6em' }}>
-                                <>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+
+                        <Box>
+                            {/* Bond Døllar within DAO */}
+                            <div style={{ display: 'flex' }}>
+                                <div style={{ width: '60%', minWidth: '6em' }}>
                                     <BigNumberInput
                                         adornment="T"
                                         value={bondAmount}
@@ -50,58 +51,62 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
                                             setBondAmount(staged)
                                         }}
                                     />
-                                </>
-                            </div>
-                            <div style={{ width: '40%', minWidth: '7em' }}>
-                                <Button
-                                    startIcon={status === 0 ? <AddIcon /> : <WarningAmberIcon />}
-                                    onClick={() => {
-                                        bond(ESDS.addr, toBaseUnitBN(bondAmount, ESD.decimals))
-                                    }}
-                                    disabled={
-                                        status === 2 ||
-                                        !isPos(bondAmount) ||
-                                        bondAmount.isGreaterThan(staged)
-                                    }>
-                                    Bond
-                                </Button>
-                            </div>
-                        </div>
-                        <div style={{ width: '2%' }} />
-                        {/* Unbond Døllar within DAO */}
-                        <div style={{ display: 'flex' }}>
-                            <div style={{ width: '60%', minWidth: '6em' }}>
-                                <>
-                                    <BigNumberInput
-                                        adornment="T"
-                                        value={unbondAmount}
-                                        setter={setUnbondAmount}
-                                    />
-                                    <MaxButton
+                                </div>
+                                <div style={{ width: '40%', minWidth: '7em' }}>
+                                    <Button
+                                        startIcon={status === 0 ? <AddIcon /> : <WarningAmberIcon />}
                                         onClick={() => {
-                                            setUnbondAmount(bonded)
+                                            bond(ESDS.addr, toBaseUnitBN(bondAmount, ESD.decimals))
                                         }}
-                                    />
-                                </>
+                                        disabled={
+                                            status === 2 ||
+                                            !isPos(bondAmount) ||
+                                            bondAmount.isGreaterThan(staged)
+                                        }>
+                                        Bond
+                                    </Button>
+                                </div>
                             </div>
-                            <div style={{ width: '40%', minWidth: '7em' }}>
-                                <Button
-                                    startIcon={status === 0 ? <RemoveIcon /> : <WarningAmberIcon />}
-                                    onClick={() => {
-                                        unbondUnderlying(
-                                            ESDS.addr,
-                                            toBaseUnitBN(unbondAmount, ESD.decimals)
-                                        )
-                                    }}
-                                    disabled={
-                                        status === 2 ||
-                                        !isPos(unbondAmount) ||
-                                        unbondAmount.isGreaterThan(bonded)
-                                    }>
-                                    Unbond
-                                </Button>
+                        </Box>
+
+                        {/* <div style={{ width: '2%' }} /> */}
+
+                        <Box>
+                            {/* Unbond Døllar within DAO */}
+                            <div style={{ display: 'flex' }}>
+                                <div style={{ width: '60%', minWidth: '6em' }}>
+                                    <>
+                                        <BigNumberInput
+                                            adornment="T"
+                                            value={unbondAmount}
+                                            setter={setUnbondAmount}
+                                        />
+                                        <MaxButton
+                                            onClick={() => {
+                                                setUnbondAmount(bonded)
+                                            }}
+                                        />
+                                    </>
+                                </div>
+                                <div style={{ width: '40%', minWidth: '7em' }}>
+                                    <Button
+                                        startIcon={status === 0 ? <RemoveIcon /> : <WarningAmberIcon />}
+                                        onClick={() => {
+                                            unbondUnderlying(
+                                                ESDS.addr,
+                                                toBaseUnitBN(unbondAmount, ESD.decimals)
+                                            )
+                                        }}
+                                        disabled={
+                                            status === 2 ||
+                                            !isPos(unbondAmount) ||
+                                            unbondAmount.isGreaterThan(bonded)
+                                        }>
+                                        Unbond
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
+                        </Box>
                     </div>
                 </div>
                 <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>

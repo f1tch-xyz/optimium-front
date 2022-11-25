@@ -142,15 +142,13 @@ function WithdrawDeposit({
                         <a
                             href="https://curve.fi/#/ethereum/pools/factory-v2-229/swap"
                             target="_blank"
-                            rel="noreferrer"
-                        >
+                            rel="noreferrer">
                             here
                         </a>{' '}
                         by swapping from DAI, USDC, USDT or 3CRV.
                     </span>
                 </div>
             </Box>
-
         </Box>
     )
 }
