@@ -16,7 +16,7 @@ function AddressBlock({ label, address }: AddressBlockProps) {
                     rel="noreferrer"
                 >
                     <Chip
-                        label={`${address.slice(0, 10)}...${address.slice(32, 42)}`}
+                        label={`${address?.slice(0, 10)}...${address?.slice(32, 42)}`}
                         variant="outlined"
                         sx={{
                             cursor: "pointer",
