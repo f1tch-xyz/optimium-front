@@ -142,6 +142,7 @@ function WithdrawDeposit({
                         <a
                             href="https://curve.fi/#/ethereum/pools/factory-v2-229/swap"
                             target="_blank"
+                            rel="noreferrer"
                         >
                             here
                         </a>{' '}
