@@ -39,8 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           borderRadius: 'none',
           fontStack: 'system',
           overlayBlur: 'small',
-          accentColor: '#000000',
-          accentColorForeground: '#ffffff'
+          accentColor: 'lightgrey',
         })}>
           <NavBar hasWeb3={hasWeb3} user={user} setUser={setUser} />
           <Container>
