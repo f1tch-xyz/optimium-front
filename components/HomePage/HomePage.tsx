@@ -91,132 +91,129 @@ const HomePage = ({ user }: HomePageProps) => {
 
     return (
         <div>
-            <Container>
-                <Grid container>
-                    <Grid item xs={4}>
-                        <Box className={Style.stat_container} height={150} border={1}>
-                            <div style={{ fontSize: 16, padding: 3 }}>T Price</div>
-                            <div
-                                style={{
-                                    fontSize: 24,
-                                    padding: 3,
-                                    fontWeight: 400,
-                                    lineHeight: 1.5,
-                                }}>
-                                {"$" + Number(price).toFixed(3)}
-                            </div>
-                        </Box>
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <Box className={Style.stat_container} height={150} border={1}>
-                            <div style={{ fontSize: 16, padding: 3 }}>Total TVL</div>
-                            <div
-                                style={{
-                                    fontSize: 24,
-                                    padding: 3,
-                                    fontWeight: 400,
-                                    lineHeight: 1.5,
-                                }}>
-                                {"$" + totalTvl}
-                            </div>
-                        </Box>
-                    </Grid>
-
-                    <Epoch />
-
-                    <Grid item xs={4}>
-                        <Box className={Style.stat_container} height={150} border={1}>
-                            <div style={{ fontSize: 16, padding: 3 }}>Forge Epoch Yield</div>
-                            <div
-                                style={{
-                                    fontSize: 24,
-                                    padding: 3,
-                                    fontWeight: 400,
-                                    lineHeight: 1.5,
-                                }}>
-                                {delineate(Number(forgeYield).toFixed(3)) + "%"}
-                            </div>
-                        </Box>
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <Box className={Style.stat_container} height={150} border={1}>
-                            <div style={{ fontSize: 16, padding: 3 }}>Forge APY</div>
-                            <div
-                                style={{
-                                    fontSize: 24,
-                                    padding: 3,
-                                    fontWeight: 400,
-                                    lineHeight: 1.5,
-                                }}>
-                                {delineate((Number(forgeYield) * 48 * 365).toFixed(3)) + "%"}
-                            </div>
-                        </Box>
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <Box className={Style.stat_container} height={150} border={1}>
-                            <div style={{ fontSize: 16, padding: 3 }}>Forge TVL</div>
-                            <div
-                                style={{
-                                    fontSize: 24,
-                                    padding: 3,
-                                    fontWeight: 400,
-                                    lineHeight: 1.5,
-                                }}>
-                                {"$" + delineate(Number(forgeTotal).toFixed(2))}
-                            </div>
-                        </Box>
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <Box className={Style.stat_container} height={150} border={1}>
-                            <div style={{ fontSize: 16, padding: 3 }}>Pool Epoch Yield</div>
-                            <div
-                                style={{
-                                    fontSize: 24,
-                                    padding: 3,
-                                    fontWeight: 400,
-                                    lineHeight: 1.5,
-                                }}>
-                                {delineate(Number(poolYield).toFixed(3)) + "%"}
-                            </div>
-                        </Box>
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <Box className={Style.stat_container} height={150} border={1}>
-                            <div style={{ fontSize: 16, padding: 3 }}>Pool APR</div>
-                            <div
-                                style={{
-                                    fontSize: 24,
-                                    padding: 3,
-                                    fontWeight: 400,
-                                    lineHeight: 1.5,
-                                }}>
-                                {delineate((Number(poolYield) * 48 * 365).toFixed(3)) + "%"}
-                            </div>
-                        </Box>
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <Box className={Style.stat_container} height={150} border={1}>
-                            <div style={{ fontSize: 16, padding: 3 }}>Pool TVL</div>
-                            <div
-                                style={{
-                                    fontSize: 24,
-                                    padding: 3,
-                                    fontWeight: 400,
-                                    lineHeight: 1.5,
-                                }}>
-                                {"$" + delineate(Number(poolTotal).toFixed(2))}
-                            </div>
-                        </Box>
-                    </Grid>
+            <Grid container>
+                <Grid item xs={4}>
+                    <Box className={Style.stat_container} height={150} border={1}>
+                        <div style={{ fontSize: 16, padding: 3 }}>T Price</div>
+                        <div
+                            style={{
+                                fontSize: 24,
+                                padding: 3,
+                                fontWeight: 400,
+                                lineHeight: 1.5,
+                            }}>
+                            {"$" + Number(price).toFixed(3)}
+                        </div>
+                    </Box>
                 </Grid>
 
-            </Container>
+                <Grid item xs={4}>
+                    <Box className={Style.stat_container} height={150} border={1}>
+                        <div style={{ fontSize: 16, padding: 3 }}>Total TVL</div>
+                        <div
+                            style={{
+                                fontSize: 24,
+                                padding: 3,
+                                fontWeight: 400,
+                                lineHeight: 1.5,
+                            }}>
+                            {"$" + totalTvl}
+                        </div>
+                    </Box>
+                </Grid>
+
+                <Epoch />
+
+                <Grid item xs={4}>
+                    <Box className={Style.stat_container} height={150} border={1}>
+                        <div style={{ fontSize: 16, padding: 3 }}>Forge Epoch Yield</div>
+                        <div
+                            style={{
+                                fontSize: 24,
+                                padding: 3,
+                                fontWeight: 400,
+                                lineHeight: 1.5,
+                            }}>
+                            {delineate(Number(forgeYield).toFixed(3)) + "%"}
+                        </div>
+                    </Box>
+                </Grid>
+
+                <Grid item xs={4}>
+                    <Box className={Style.stat_container} height={150} border={1}>
+                        <div style={{ fontSize: 16, padding: 3 }}>Forge APY</div>
+                        <div
+                            style={{
+                                fontSize: 24,
+                                padding: 3,
+                                fontWeight: 400,
+                                lineHeight: 1.5,
+                            }}>
+                            {delineate((Number(forgeYield) * 48 * 365).toFixed(3)) + "%"}
+                        </div>
+                    </Box>
+                </Grid>
+
+                <Grid item xs={4}>
+                    <Box className={Style.stat_container} height={150} border={1}>
+                        <div style={{ fontSize: 16, padding: 3 }}>Forge TVL</div>
+                        <div
+                            style={{
+                                fontSize: 24,
+                                padding: 3,
+                                fontWeight: 400,
+                                lineHeight: 1.5,
+                            }}>
+                            {"$" + delineate(Number(forgeTotal).toFixed(2))}
+                        </div>
+                    </Box>
+                </Grid>
+
+                <Grid item xs={4}>
+                    <Box className={Style.stat_container} height={150} border={1}>
+                        <div style={{ fontSize: 16, padding: 3 }}>Pool Epoch Yield</div>
+                        <div
+                            style={{
+                                fontSize: 24,
+                                padding: 3,
+                                fontWeight: 400,
+                                lineHeight: 1.5,
+                            }}>
+                            {delineate(Number(poolYield).toFixed(3)) + "%"}
+                        </div>
+                    </Box>
+                </Grid>
+
+                <Grid item xs={4}>
+                    <Box className={Style.stat_container} height={150} border={1}>
+                        <div style={{ fontSize: 16, padding: 3 }}>Pool APR</div>
+                        <div
+                            style={{
+                                fontSize: 24,
+                                padding: 3,
+                                fontWeight: 400,
+                                lineHeight: 1.5,
+                            }}>
+                            {delineate((Number(poolYield) * 48 * 365).toFixed(3)) + "%"}
+                        </div>
+                    </Box>
+                </Grid>
+
+                <Grid item xs={4}>
+                    <Box className={Style.stat_container} height={150} border={1}>
+                        <div style={{ fontSize: 16, padding: 3 }}>Pool TVL</div>
+                        <div
+                            style={{
+                                fontSize: 24,
+                                padding: 3,
+                                fontWeight: 400,
+                                lineHeight: 1.5,
+                            }}>
+                            {"$" + delineate(Number(poolTotal).toFixed(2))}
+                        </div>
+                    </Box>
+                </Grid>
+            </Grid>
         </div>
     );
 };
