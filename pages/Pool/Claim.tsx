@@ -22,62 +22,67 @@ function Claim({ poolAddress, claimable, status }: ClaimProps) {
     const [claimAmount, setClaimAmount] = useState(new BigNumber(0))
 
     return (
-        <Box className={styles.box_custom_style}>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {/* total Issued */}
-                <div style={{ flexBasis: '32%' }}>
-                    <BalanceBlock asset="Claimable" balance={claimable} suffix={'T'} />
-                </div>
-                {/* Deposit UNI-V2 into Pool */}
-                <div style={{ flexBasis: '35%' }} />
-                <div style={{ flexBasis: '33%', paddingTop: '2%' }}>
-                    <div style={{ display: 'flex' }}>
-                        <div style={{ width: '60%', minWidth: '6em' }}>
-                            <>
-                                <BigNumberInput
-                                    adornment="T"
-                                    value={claimAmount}
-                                    setter={setClaimAmount}
-                                    disabled={status !== 0}
-                                />
-                                <MaxButton
+        <Box height={165} border={'1px solid black'} className={styles.box_custom_style}>
+            <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
+                CLAIM
+            </Box>
+            <Box px={2}>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {/* total Issued */}
+                    <div style={{ flexBasis: '32%' }}>
+                        <BalanceBlock asset="Claimable" balance={claimable} suffix={'T'} />
+                    </div>
+                    {/* Deposit UNI-V2 into Pool */}
+                    <div style={{ flexBasis: '35%' }} />
+                    <div style={{ flexBasis: '33%', paddingTop: '2%' }}>
+                        <div style={{ display: 'flex' }}>
+                            <div style={{ width: '60%', minWidth: '6em' }}>
+                                <>
+                                    <BigNumberInput
+                                        adornment="T"
+                                        value={claimAmount}
+                                        setter={setClaimAmount}
+                                        disabled={status !== 0}
+                                    />
+                                    <MaxButton
+                                        onClick={() => {
+                                            setClaimAmount(claimable)
+                                        }}
+                                    />
+                                </>
+                            </div>
+                            <div style={{ width: '40%', minWidth: '6em' }}>
+                                <Button
+                                    startIcon={
+                                        poolAddress === '' || status !== 0 || !isPos(claimAmount) ? (
+                                            <HttpsIcon />
+                                        ) : (
+                                            <ArrowDownwardIcon />
+                                        )
+                                    }
                                     onClick={() => {
-                                        setClaimAmount(claimable)
+                                        claimPool(
+                                            poolAddress,
+                                            toBaseUnitBN(claimAmount, ESD.decimals),
+                                            (hash: any) => setClaimAmount(new BigNumber(0))
+                                        )
                                     }}
-                                />
-                            </>
-                        </div>
-                        <div style={{ width: '40%', minWidth: '6em' }}>
-                            <Button
-                                startIcon={
-                                    poolAddress === '' || status !== 0 || !isPos(claimAmount) ? (
-                                        <HttpsIcon />
-                                    ) : (
-                                        <ArrowDownwardIcon />
-                                    )
-                                }
-                                onClick={() => {
-                                    claimPool(
-                                        poolAddress,
-                                        toBaseUnitBN(claimAmount, ESD.decimals),
-                                        (hash: any) => setClaimAmount(new BigNumber(0))
-                                    )
-                                }}
-                                disabled={
-                                    poolAddress === '' || status !== 0 || !isPos(claimAmount)
-                                }>
-                                Claim
-                            </Button>
+                                    disabled={
+                                        poolAddress === '' || status !== 0 || !isPos(claimAmount)
+                                    }>
+                                    Claim
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>
-                <span style={{ opacity: 0.5 }}>
-                    {' '}
-                    Unbond to make rewards claimable after your status is Unlocked{' '}
-                </span>
-            </div>
+                <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>
+                    <span style={{ opacity: 0.5 }}>
+                        {' '}
+                        Unbond to make rewards claimable after your status is Unlocked{' '}
+                    </span>
+                </div>
+            </Box>
         </Box>
     )
 }

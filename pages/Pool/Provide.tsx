@@ -56,103 +56,108 @@ function Provide({
     }
 
     return (
-        <Box className={styles.box_custom_style}>
-            {userUSDCAllowance.comparedTo(MAX_UINT256.dividedBy(2)) > 0 ? (
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {/* total rewarded */}
-                    <div style={{ flexBasis: '32%' }}>
-                        <BalanceBlock asset="Rewarded" balance={rewarded} suffix={'T'} />
-                    </div>
-                    <div style={{ flexBasis: '33%' }}>
-                        <BalanceBlock
-                            asset="3CRV Balance"
-                            balance={userUSDCBalance}
-                            suffix={'3CRV'}
-                        />
-                    </div>
-                    <div style={{ flexBasis: '2%' }} />
-                    {/* Provide liquidity using Pool rewards */}
-                    <div style={{ flexBasis: '33%', paddingTop: '2%' }}>
-                        <div style={{ display: 'flex' }}>
-                            <div style={{ width: '60%', minWidth: '6em' }}>
-                                <>
-                                    <BigNumberInput
-                                        adornment="T"
-                                        value={provideAmount}
-                                        setter={onChangeAmountESD}
-                                        disabled={status === 1}
-                                    />
-                                    <MaxButton
+        <Box height={165} border={'1px solid black'} className={styles.box_custom_style}>
+            <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
+                PROVIDE
+            </Box>
+            <Box px={2}>
+                {userUSDCAllowance.comparedTo(MAX_UINT256.dividedBy(2)) > 0 ? (
+                    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        {/* total rewarded */}
+                        <div style={{ flexBasis: '32%' }}>
+                            <BalanceBlock asset="Rewarded" balance={rewarded} suffix={'T'} />
+                        </div>
+                        <div style={{ flexBasis: '33%' }}>
+                            <BalanceBlock
+                                asset="3CRV Balance"
+                                balance={userUSDCBalance}
+                                suffix={'3CRV'}
+                            />
+                        </div>
+                        <div style={{ flexBasis: '2%' }} />
+                        {/* Provide liquidity using Pool rewards */}
+                        <div style={{ flexBasis: '33%', paddingTop: '2%' }}>
+                            <div style={{ display: 'flex' }}>
+                                <div style={{ width: '60%', minWidth: '6em' }}>
+                                    <>
+                                        <BigNumberInput
+                                            adornment="T"
+                                            value={provideAmount}
+                                            setter={onChangeAmountESD}
+                                            disabled={status === 1}
+                                        />
+                                        <MaxButton
+                                            onClick={() => {
+                                                onChangeAmountESD(rewarded)
+                                            }}
+                                        />
+                                    </>
+                                </div>
+                                <div style={{ width: '40%', minWidth: '6em' }}>
+                                    <Button
+                                        startIcon={
+                                            poolAddress === '' ||
+                                                status !== 0 ||
+                                                !isPos(provideAmount) ||
+                                                usdcAmount.isGreaterThan(userUSDCBalance) ? (
+                                                <HttpsIcon />
+                                            ) : (
+                                                <ArrowUpwardIcon />
+                                            )
+                                        }
                                         onClick={() => {
-                                            onChangeAmountESD(rewarded)
+                                            providePool(
+                                                poolAddress,
+                                                parseEther(provideAmount.toString()),
+                                                (hash: any) => setProvideAmount(new BigNumber(0))
+                                            )
                                         }}
-                                    />
-                                </>
-                            </div>
-                            <div style={{ width: '40%', minWidth: '6em' }}>
-                                <Button
-                                    startIcon={
-                                        poolAddress === '' ||
+                                        disabled={
+                                            poolAddress === '' ||
                                             status !== 0 ||
                                             !isPos(provideAmount) ||
-                                            usdcAmount.isGreaterThan(userUSDCBalance) ? (
-                                            <HttpsIcon />
-                                        ) : (
-                                            <ArrowUpwardIcon />
-                                        )
-                                    }
-                                    onClick={() => {
-                                        providePool(
-                                            poolAddress,
-                                            parseEther(provideAmount.toString()),
-                                            (hash: any) => setProvideAmount(new BigNumber(0))
-                                        )
-                                    }}
-                                    disabled={
-                                        poolAddress === '' ||
-                                        status !== 0 ||
-                                        !isPos(provideAmount) ||
-                                        usdcAmount.isGreaterThan(userUSDCBalance)
-                                    }>
-                                    Provide
-                                </Button>
+                                            usdcAmount.isGreaterThan(userUSDCBalance)
+                                        }>
+                                        Provide
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                ) : (
+                    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        {/* total rewarded */}
+                        <div style={{ flexBasis: '32%' }}>
+                            <BalanceBlock asset="Rewarded" balance={rewarded} suffix={'T'} />
+                        </div>
+                        <div style={{ flexBasis: '33%' }}>
+                            <BalanceBlock
+                                asset="3CRV Balance"
+                                balance={userUSDCBalance}
+                                suffix={'3CRV'}
+                            />
+                        </div>
+                        <div style={{ flexBasis: '2%' }} />
+                        {/* Approve Pool to spend USDC */}
+                        <div style={{ flexBasis: '33%', paddingTop: '2%' }}>
+                            <Button
+                                startIcon={<AddIcon />}
+                                onClick={() => {
+                                    approve(USDC.addr, poolAddress)
+                                }}
+                                disabled={poolAddress === '' || user === ''}>
+                                Approve
+                            </Button>
+                        </div>
+                    </div>
+                )}
+                <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>
+                    <span style={{ opacity: 0.5 }}>
+                        {' '}
+                        Zap your rewards directly to LP by providing equal 3CRV{' '}
+                    </span>
                 </div>
-            ) : (
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {/* total rewarded */}
-                    <div style={{ flexBasis: '32%' }}>
-                        <BalanceBlock asset="Rewarded" balance={rewarded} suffix={'T'} />
-                    </div>
-                    <div style={{ flexBasis: '33%' }}>
-                        <BalanceBlock
-                            asset="3CRV Balance"
-                            balance={userUSDCBalance}
-                            suffix={'3CRV'}
-                        />
-                    </div>
-                    <div style={{ flexBasis: '2%' }} />
-                    {/* Approve Pool to spend USDC */}
-                    <div style={{ flexBasis: '33%', paddingTop: '2%' }}>
-                        <Button
-                            startIcon={<AddIcon />}
-                            onClick={() => {
-                                approve(USDC.addr, poolAddress)
-                            }}
-                            disabled={poolAddress === '' || user === ''}>
-                            Approve
-                        </Button>
-                    </div>
-                </div>
-            )}
-            <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>
-                <span style={{ opacity: 0.5 }}>
-                    {' '}
-                    Zap your rewards directly to LP by providing equal 3CRV{' '}
-                </span>
-            </div>
+            </Box>
         </Box>
     )
 }

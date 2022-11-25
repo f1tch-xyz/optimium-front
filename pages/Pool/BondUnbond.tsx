@@ -33,90 +33,95 @@ function BondUnbond({
     const [unbondAmount, setUnbondAmount] = useState(new BigNumber(0))
 
     return (
-        <Box className={styles.box_custom_style}>
-            <div className={styles.wrapper}>
-                {/* Total bonded */}
+        <Box height={200} border={'1px solid black'} className={styles.box_custom_style}>
+            <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
+                FORGE
+            </Box>
+            <Box px={2}>
+                <div className={styles.wrapper}>
+                    {/* Total bonded */}
 
-                <div style={{ display: 'flex' }}>
-                    <div style={{ whiteSpace: 'nowrap' }}>
-                        <BalanceBlock asset="Bonded" balance={bonded} suffix={'T-3CRV'} />
+                    <div style={{ display: 'flex' }}>
+                        <div style={{ whiteSpace: 'nowrap' }}>
+                            <BalanceBlock asset="Bonded" balance={bonded} suffix={'T-3CRV'} />
+                        </div>
+                    </div>
+                    <div className={styles.button_wrapper}>
+                        {/* Bond UNI-V2 within Pool */}
+                        <div style={{ display: 'flex' }}>
+                            <div style={{ width: '60%', minWidth: '6em' }}>
+                                <>
+                                    <BigNumberInput
+                                        adornment="T-3CRV"
+                                        value={bondAmount}
+                                        setter={setBondAmount}
+                                    />
+                                    <MaxButton
+                                        onClick={() => {
+                                            setBondAmount(staged)
+                                        }}
+                                    />
+                                </>
+                            </div>
+                            <div style={{ width: '40%', minWidth: '7em' }}>
+                                <Button
+                                    startIcon={status === 0 ? <AddIcon /> : <WarningAmberIcon />}
+                                    onClick={() => {
+                                        bondPool(
+                                            poolAddress,
+                                            toBaseUnitBN(bondAmount, UNI.decimals),
+                                            (hash: any) => setBondAmount(new BigNumber(0))
+                                        )
+                                    }}
+                                    disabled={poolAddress === '' || !isPos(bondAmount)}>
+                                    Bond
+                                </Button>
+                            </div>
+                        </div>
+                        <div style={{ flexBasis: '2%' }} />
+                        {/* Unbond UNI-V2 within Pool */}
+                        <div style={{ display: 'flex' }}>
+                            <div style={{ width: '60%', minWidth: '6em' }}>
+                                <>
+                                    <BigNumberInput
+                                        adornment="T-3CRV"
+                                        value={unbondAmount}
+                                        setter={setUnbondAmount}
+                                    />
+                                    <MaxButton
+                                        onClick={() => {
+                                            setUnbondAmount(bonded)
+                                        }}
+                                    />
+                                </>
+                            </div>
+                            <div style={{ width: '40%', minWidth: '7em' }}>
+                                <Button
+                                    startIcon={status === 0 ? <RemoveIcon /> : <WarningAmberIcon />}
+                                    onClick={() => {
+                                        unbondPool(
+                                            poolAddress,
+                                            toBaseUnitBN(unbondAmount, UNI.decimals),
+                                            (hash: any) => setUnbondAmount(new BigNumber(0))
+                                        )
+                                    }}
+                                    disabled={poolAddress === '' || !isPos(unbondAmount)}>
+                                    Unbond
+                                </Button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className={styles.button_wrapper}>
-                    {/* Bond UNI-V2 within Pool */}
-                    <div style={{ display: 'flex' }}>
-                        <div style={{ width: '60%', minWidth: '6em' }}>
-                            <>
-                                <BigNumberInput
-                                    adornment="T-3CRV"
-                                    value={bondAmount}
-                                    setter={setBondAmount}
-                                />
-                                <MaxButton
-                                    onClick={() => {
-                                        setBondAmount(staged)
-                                    }}
-                                />
-                            </>
-                        </div>
-                        <div style={{ width: '40%', minWidth: '7em' }}>
-                            <Button
-                                startIcon={status === 0 ? <AddIcon /> : <WarningAmberIcon />}
-                                onClick={() => {
-                                    bondPool(
-                                        poolAddress,
-                                        toBaseUnitBN(bondAmount, UNI.decimals),
-                                        (hash: any) => setBondAmount(new BigNumber(0))
-                                    )
-                                }}
-                                disabled={poolAddress === '' || !isPos(bondAmount)}>
-                                Bond
-                            </Button>
-                        </div>
-                    </div>
-                    <div style={{ flexBasis: '2%' }} />
-                    {/* Unbond UNI-V2 within Pool */}
-                    <div style={{ display: 'flex' }}>
-                        <div style={{ width: '60%', minWidth: '6em' }}>
-                            <>
-                                <BigNumberInput
-                                    adornment="T-3CRV"
-                                    value={unbondAmount}
-                                    setter={setUnbondAmount}
-                                />
-                                <MaxButton
-                                    onClick={() => {
-                                        setUnbondAmount(bonded)
-                                    }}
-                                />
-                            </>
-                        </div>
-                        <div style={{ width: '40%', minWidth: '7em' }}>
-                            <Button
-                                startIcon={status === 0 ? <RemoveIcon /> : <WarningAmberIcon />}
-                                onClick={() => {
-                                    unbondPool(
-                                        poolAddress,
-                                        toBaseUnitBN(unbondAmount, UNI.decimals),
-                                        (hash: any) => setUnbondAmount(new BigNumber(0))
-                                    )
-                                }}
-                                disabled={poolAddress === '' || !isPos(unbondAmount)}>
-                                Unbond
-                            </Button>
-                        </div>
-                    </div>
+                <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>
+                    <span style={{ opacity: 0.5 }}>
+                        {' '}
+                        Bonding events will restart the lockup timer (Exit lockup: {
+                            lockup
+                        }{' '}
+                        epochs)
+                    </span>
                 </div>
-            </div>
-            <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>
-                <span style={{ opacity: 0.5 }}>
-                    {' '}
-                    Bonding events will restart the lockup timer (Exit lockup: {
-                        lockup
-                    }{' '}
-                    epochs)
-                </span>
-            </div>
+            </Box>
         </Box>
     )
 }

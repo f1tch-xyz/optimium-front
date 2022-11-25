@@ -217,7 +217,7 @@ const Pool = ({ user }: { user: string }) => {
                 unlocked={userStatusUnlocked} />
 
             <div className={styles.stats}>
-                <Box>
+                <Box pl={3} height={100} display={'flex'} flexDirection={'column'} alignItems={'start'} justifyContent={'center'} border={'1px solid black'}>
                     <div style={{ fontSize: 16 }}>Pool Epoch Yield</div>
                     <div
                         style={{
@@ -230,7 +230,7 @@ const Pool = ({ user }: { user: string }) => {
                     </div>
                 </Box>
 
-                <Box>
+                <Box pl={3} height={100} display={'flex'} flexDirection={'column'} alignItems={'start'} justifyContent={'center'} border={'1px solid black'}>
                     <div style={{ fontSize: 16 }}>Pool APR</div>
                     <div
                         style={{
@@ -243,7 +243,7 @@ const Pool = ({ user }: { user: string }) => {
                     </div>
                 </Box>
 
-                <Box>
+                <Box pl={3} height={100} display={'flex'} flexDirection={'column'} alignItems={'start'} justifyContent={'center'} border={'1px solid black'}>
                     <div style={{ fontSize: 16 }}>Pool TVL</div>
                     <div
                         style={{

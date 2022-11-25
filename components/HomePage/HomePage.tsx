@@ -53,7 +53,6 @@ function Epoch() {
 }
 
 const HomePage = ({ user }: HomePageProps) => {
-    // const history = useHistory()
 
     const [price, setPrice] = useState("...");
     const [forgeYield, setForgeYield] = useState("...");

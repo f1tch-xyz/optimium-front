@@ -123,7 +123,7 @@ const Forge = ({ user }: { user: string }) => {
             />
 
             <div className={styles.stats}>
-                <Box>
+                <Box pl={3} height={100} display={'flex'} flexDirection={'column'} alignItems={'start'} justifyContent={'center'} border={'1px solid black'}>
                     <div style={{ fontSize: 16 }}>Forge Epoch Yield</div>
                     <div
                         style={{
@@ -136,7 +136,7 @@ const Forge = ({ user }: { user: string }) => {
                     </div>
                 </Box>
 
-                <Box>
+                <Box pl={3} height={100} display={'flex'} flexDirection={'column'} alignItems={'start'} justifyContent={'center'} border={'1px solid black'}>
                     <div style={{ fontSize: 16 }}>Forge APY</div>
                     <div
                         style={{
@@ -149,7 +149,7 @@ const Forge = ({ user }: { user: string }) => {
                     </div>
                 </Box>
 
-                <Box>
+                <Box pl={3} height={100} display={'flex'} flexDirection={'column'} alignItems={'start'} justifyContent={'center'} border={'1px solid black'}>
                     <div style={{ fontSize: 16 }}>Forge TVL</div>
                     <div
                         style={{

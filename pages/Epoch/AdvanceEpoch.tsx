@@ -14,24 +14,29 @@ type AdvanceEpochProps = {
 
 function AdvanceEpoch({ user, epoch, epochTime }: AdvanceEpochProps) {
     return (
-        <Box className={styles.box_custom_style}>
-            <div style={{ display: 'flex' }}>
-                {/* Epoch Time */}
-                <div style={{ width: '30%' }}>
-                    <NumberBlock title="Epoch (from current time)" num={epochTime} />
+        <Box height={125} border={'1px solid black'} className={styles.box_custom_style}>
+            <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
+                ADVANCE EPOCH
+            </Box>
+            <Box px={2}>
+                <div style={{ display: 'flex' }}>
+                    {/* Epoch Time */}
+                    <div style={{ width: '30%' }}>
+                        <NumberBlock title="Epoch (from current time)" num={epochTime} />
+                    </div>
+                    {/* Advance Epoch */}
+                    <div style={{ width: '40%' }} />
+                    <div style={{ width: '30%', paddingTop: '2%' }}>
+                        <Button
+                            startIcon={<AddIcon />}
+                            onClick={() => {
+                                advance(ESDS.addr)
+                            }}>
+                            Advance
+                        </Button>
+                    </div>
                 </div>
-                {/* Advance Epoch */}
-                <div style={{ width: '40%' }} />
-                <div style={{ width: '30%', paddingTop: '2%' }}>
-                    <Button
-                        startIcon={<AddIcon />}
-                        onClick={() => {
-                            advance(ESDS.addr)
-                        }}>
-                        Advance
-                    </Button>
-                </div>
-            </div>
+            </Box>
         </Box>
     )
 }
