@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import BigNumber from 'bignumber.js';
 import React, { useEffect, useState } from 'react';
 import { ESD, ESDS, UNI } from '../../constants/tokens';
@@ -137,8 +138,9 @@ const Regulation = ({ user }: { user: string }) => {
         className={commonStyles.icon_header}
         primary="Regulation History"
       /> */}
-
-            <RegulationHistory user={user} />
+            <Box pt={2}>
+                <RegulationHistory user={user} />
+            </Box>
         </>
     )
 }

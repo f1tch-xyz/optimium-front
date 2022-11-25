@@ -59,6 +59,7 @@ function Claim({ poolAddress, claimable, status }: ClaimProps) {
                                         <ArrowDownwardIcon />
                                     )
                                 }
+                                sx={{ height: '40px' }}
                                 onClick={() => {
                                     claimPool(
                                         poolAddress,

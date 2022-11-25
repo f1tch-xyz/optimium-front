@@ -66,6 +66,7 @@ function BondUnbond({
                                 </div>
                                 <Button
                                     startIcon={status === 0 ? <AddIcon /> : <WarningAmberIcon />}
+                                    sx={{ height: '40px' }}
                                     onClick={() => {
                                         bondPool(
                                             poolAddress,
@@ -96,6 +97,7 @@ function BondUnbond({
                                 </div>
                                 <Button
                                     startIcon={status === 0 ? <RemoveIcon /> : <WarningAmberIcon />}
+                                    sx={{ height: '40px' }}
                                     onClick={() => {
                                         unbondPool(
                                             poolAddress,

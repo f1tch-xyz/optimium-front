@@ -6,6 +6,9 @@ import { getInstantaneousPrice, getTokenBalance } from '../../utils/infura';
 import { toTokenUnitsBN } from '../../utils/number';
 import TradePageHeader from './Header';
 import styles from './Trade.module.scss'
+import BarChartIcon from '@mui/icons-material/BarChart';
+import ImportExportIcon from '@mui/icons-material/ImportExport';
+import WavesIcon from '@mui/icons-material/Waves';
 
 const UniswapPool = ({ user }: { user: string }) => {
 
@@ -57,13 +60,13 @@ const UniswapPool = ({ user }: { user: string }) => {
             />
 
             <div className={styles.box_container}>
-                <Box m={1} sx={{ height: '200px', border: '1px solid', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+                <Box mr={2} sx={{ height: '200px', border: '1px solid', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
                     <a href="https://curve.fi/#/ethereum/pools/factory-v2-229/swap">
                         <div className={styles.title}>
                             Info
                         </div>
                         <div className={styles.icon}>
-                            CHART ICON
+                            <BarChartIcon fontSize='large' />
                         </div>
                         <div className={styles.description}>
                             View T-3CRV pool stats.
@@ -71,13 +74,13 @@ const UniswapPool = ({ user }: { user: string }) => {
                     </a>
                 </Box>
 
-                <Box m={1} sx={{ height: '200px', border: '1px solid', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+                <Box sx={{ height: '200px', border: '1px solid', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
                     <a href="https://curve.fi/#/ethereum/pools/factory-v2-229/swap">
                         <div className={styles.title}>
                             Trade
                         </div>
                         <div className={styles.icon}>
-                            EXCHANGE ICON
+                            <ImportExportIcon fontSize='large' />
                         </div>
                         <div className={styles.description}>
                             Trade T tokens.
@@ -85,13 +88,13 @@ const UniswapPool = ({ user }: { user: string }) => {
                     </a>
                 </Box>
 
-                <Box m={1} sx={{ height: '200px', border: '1px solid', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+                <Box ml={2} sx={{ height: '200px', border: '1px solid black', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
                     <a href="https://curve.fi/#/ethereum/pools/factory-v2-229/deposit">
                         <div className={styles.title}>
                             Supply
                         </div>
                         <div className={styles.icon}>
-                            WATER ICON
+                            <WavesIcon fontSize='large' />
                         </div>
                         <div className={styles.description}>
                             Supply and redeem liquidity.

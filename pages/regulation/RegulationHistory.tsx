@@ -7,7 +7,8 @@ import BigNumber from 'bignumber.js'
 import styles from './Regulation.module.scss'
 import { parseEther } from 'ethers/lib/utils'
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
+import Box from '@mui/material/Box'
 
 type RegulationHistoryProps = {
     user: string
@@ -73,7 +74,7 @@ function formatDeltaBonded(type: any, data: any) {
 
 function renderEntry({ type, data, totalDebt }: Regulation): any {
     return {
-        id: uuid(),
+        id: uuidv4(),
         epoch: data.epoch.toString(),
         price: formatPrice(type, data),
         deltaRedeemable: formatDeltaRedeemable(type, data),
@@ -84,7 +85,7 @@ function renderEntry({ type, data, totalDebt }: Regulation): any {
 
 function RegulationHistory({ user }: RegulationHistoryProps) {
     const [epoch, setEpoch] = useState(0)
-    const [regulations, setRegulations] = useState<Regulation[]>([])
+    const [regulations, setRegulations] = useState<Regulation[]>([]);
     const [rows, setRows] = useState<any[]>([])
     const [page, setPage] = useState(0)
     const [initialized, setInitialized] = useState(false)
@@ -107,48 +108,49 @@ function RegulationHistory({ user }: RegulationHistoryProps) {
                     }
                     return reg;
                 }));
-
                 setInitialized(true);
             }
         }
 
 
-        updateUserInfo()
-        const id = setInterval(updateUserInfo, 15000)
+        updateUserInfo();
+        setRows(regulations.map((reg: any) => renderEntry(reg)))
 
-        if (regulations) {
-            setRows(regulations.map((reg: any) => renderEntry(reg)));
-        }
+        // setRows(regulations.map((reg: any) => renderEntry(reg)))
+        const id = setInterval(updateUserInfo, 15000)
 
         // eslint-disable-next-line consistent-return
         return () => {
-            isCancelled = true
-            clearInterval(id)
+            isCancelled = true;
+            clearInterval(id);
         }
-    }, [regulations]);
+    }, [initialized]);
 
     const columns: GridColDef[] = [
-        { field: 'epoch', headerName: 'Epoch', minWidth: 150 },
-        { field: 'price', headerName: 'Price', minWidth: 150 },
-        { field: 'deltaRedeemable', headerName: 'Redeemable', minWidth: 150 },
-        { field: 'deltaDebt', headerName: 'Debt', minWidth: 150 },
-        { field: 'deltaBonded', headerName: 'Bonded', minWidth: 150 },
+        { field: 'epoch', headerName: 'Epoch', flex: 1 },
+        { field: 'price', headerName: 'Price', flex: 1 },
+        { field: 'deltaRedeemable', headerName: 'Redeemable', flex: 1 },
+        { field: 'deltaDebt', headerName: 'Debt', flex: 1 },
+        { field: 'deltaBonded', headerName: 'Bonded', flex: 1 },
     ];
 
     return (
-        <div
-            className={styles.data_view}>
-            Regulation History
-            <div style={{ height: 600, width: '100%' }}>
-                <DataGrid
-                    loading={!initialized}
-                    rows={rows}
-                    columns={columns}
-                    pageSize={10}
-                    rowsPerPageOptions={[10]}
-                />
-            </div>
-        </div>
+        <Box border={'1px solid black'} className={styles.box_custom_style}>
+            <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
+                HISTORY
+            </Box>
+            <Box px={2}>
+                <div style={{ height: 635, width: '100%' }}>
+                    <DataGrid
+                        loading={!initialized}
+                        rows={rows}
+                        columns={columns}
+                        pageSize={10}
+                        rowsPerPageOptions={[10]}
+                    />
+                </div>
+            </Box>
+        </Box>
     )
 }
 

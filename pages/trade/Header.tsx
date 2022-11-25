@@ -4,6 +4,8 @@ import BigNumber from 'bignumber.js';
 import styles from './Trade.module.scss';
 import BalanceBlock from '../../components/common/BalanceBlock';
 import AddressBlock from '../../components/common/AddressBlock';
+import Box from '@mui/material/Box';
+
 
 type TradePageHeaderProps = {
     pairBalanceESD: BigNumber
@@ -20,28 +22,29 @@ const TradePageHeader = ({
 }: TradePageHeaderProps) => {
     return (
         <div className={styles.stats}>
-            <div style={{ flexBasis: '25%' }}>
+            <Box width={'25%'}>
                 <BalanceBlock asset="T Price" balance={price} suffix={'USD'} />
-            </div>
-            <div style={{ flexBasis: '25%' }}>
+            </Box>
+
+            <Box width={'25%'}>
                 <BalanceBlock
                     asset="T Liquidity"
                     balance={pairBalanceESD}
                     suffix={'T'}
                 />
-            </div>
-            <div style={{ flexBasis: '25%' }}>
+            </Box>
+
+            <Box width={'25%'}>
                 <BalanceBlock
                     asset="3CRV Liquidity"
                     balance={pairBalanceUSDC}
                     suffix={'3CRV'}
                 />
-            </div>
-            <div style={{ flexBasis: '25%' }}>
-                <>
-                    <AddressBlock label="Curve Contract" address={uniswapPair} />
-                </>
-            </div>
+            </Box>
+
+            <Box width={'25%'}>
+                <AddressBlock label="Curve Contract" address={uniswapPair} />
+            </Box>
         </div>
     )
 }

@@ -34,9 +34,6 @@ let metapoolAbi = metaPool.abi as any;
  * @return {Promise<string>}
  */
 export const getTokenBalance = async (token: any, account: any) => {
-  console.log('token', token);
-  console.log('account', account);
-  
   if (account === "") return "0";
   const tokenContract = new Contract(token, titaniumAbi, await getProvider());
   return tokenContract.balanceOf(account);
