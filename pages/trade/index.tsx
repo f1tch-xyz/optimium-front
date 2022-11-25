@@ -28,6 +28,8 @@ const UniswapPool = ({ user }: { user: string }) => {
                         getInstantaneousPrice(),
                     ])
 
+                // console.log('price', price);
+
                 if (!isCancelled) {
                     setPairBalanceESD(toTokenUnitsBN(pairBalanceESDStr, ESD.decimals))
                     setPairBalanceUSDC(toTokenUnitsBN(pairBalanceUSDCStr, USDC.decimals))

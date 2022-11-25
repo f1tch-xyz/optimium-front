@@ -594,15 +594,12 @@ export const getThreeCRVPrice = async () => {
 export const getInstantaneousPrice = async () => {
   const provider = await getProvider();
   const exchange = new Contract(UNI.addr, metapoolAbi, provider);
-  const threePool = new Contract(
-    "0xbebc44782c7db0a1a60cb6fe97d0b483032ff1c7",
-    metapoolAbi,
-    provider
-  );
+  const threePool = new Contract("0xbebc44782c7db0a1a60cb6fe97d0b483032ff1c7", metapoolAbi, provider);
+
   try {
     const [threeCRVPrice, TPrice] = await Promise.all([
       threePool.get_virtual_price(),
-      exchange.get_dy(0, 1, parseEther("1"), [0, 0]),
+      exchange.get_dy(0, 1, parseEther("1"))
     ]);
 
     const price = toTokenUnitsBN(threeCRVPrice, USDC.decimals)?.multipliedBy(
@@ -656,7 +653,6 @@ export const getPoolBalanceOfStaged = async (pool: any, account: any) => {
  * @return {Promise<string>}
  */
 export const getPoolBalanceOfRewarded = async (pool: any, account: any) => {
-  if (account === "") return "0";
   const poolContract = new Contract(pool, poolAbi, await getProvider());
   return poolContract.balanceOfRewarded(account);
 };

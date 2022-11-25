@@ -13,8 +13,10 @@ function BalanceBlock({ asset, balance, suffix = '' }: BlanceBlockProps) {
     let integer = '0'
     let digits = '0'
     const balanceBN = new BigNumber(balance)
+
     if (balanceBN.gte(new BigNumber(0))) {
         const tokens = formatBN(balanceBN, 3).split('.')
+
         integer = tokens[0]
         digits = tokens[1]
     }
