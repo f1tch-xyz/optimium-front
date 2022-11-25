@@ -8,7 +8,7 @@ import RegulationHeader from './Header';
 import styles from './Regulation.module.scss';
 import RegulationHistory from './RegulationHistory';
 
-const ONE_COUPON = new BigNumber(10).pow(18)
+const ONE_COUPON = new BigNumber(10).pow(18);
 
 const Regulation = ({ user }: { user: string }) => {
 
