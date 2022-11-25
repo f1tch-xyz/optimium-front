@@ -163,20 +163,24 @@ const Forge = ({ user }: { user: string }) => {
                 </Box>
             </div>
 
-            <WithdrawDeposit
-                user={user}
-                balance={userESDBalance}
-                allowance={userESDAllowance}
-                stagedBalance={userStagedBalance}
-                status={userStatus}
-            />
+            <Box>
+                <WithdrawDeposit
+                    user={user}
+                    balance={userESDBalance}
+                    allowance={userESDAllowance}
+                    stagedBalance={userStagedBalance}
+                    status={userStatus}
+                />
+            </Box>
 
-            <BondUnbond
-                staged={userStagedBalance}
-                bonded={userBondedBalance}
-                status={userStatus}
-                lockup={lockup}
-            />
+            <Box pt={2}>
+                <BondUnbond
+                    staged={userStagedBalance}
+                    bonded={userBondedBalance}
+                    status={userStatus}
+                    lockup={lockup}
+                />
+            </Box>
         </>
     )
 }

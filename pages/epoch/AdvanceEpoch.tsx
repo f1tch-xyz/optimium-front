@@ -14,19 +14,19 @@ type AdvanceEpochProps = {
 
 function AdvanceEpoch({ user, epoch, epochTime }: AdvanceEpochProps) {
     return (
-        <Box height={125} border={'1px solid black'} className={styles.box_custom_style}>
+        <Box border={'1px solid black'} className={styles.box_custom_style}>
             <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
                 ADVANCE EPOCH
             </Box>
             <Box px={2}>
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', alignItems: 'center', height: '100px' }}>
                     {/* Epoch Time */}
                     <div style={{ width: '30%' }}>
                         <NumberBlock title="Epoch (from current time)" num={epochTime} />
                     </div>
                     {/* Advance Epoch */}
                     <div style={{ width: '40%' }} />
-                    <div style={{ width: '30%', paddingTop: '2%' }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', width: '30%' }}>
                         <Button
                             startIcon={<AddIcon />}
                             onClick={() => {

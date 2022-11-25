@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BigNumber from 'bignumber.js';
-import { TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 
 type BigNumberInputProps = {
     value: BigNumber,
@@ -13,23 +13,26 @@ type BigNumberInputProps = {
 function BigNumberInput({ value, setter, adornment, disabled = false }: BigNumberInputProps) {
     return (
         <>
-            <TextField
-                type="number"
-                value={value.isNegative() ? '' : value.toFixed()}
-                onChange={(event) => {
-                    if (event.target.value) {
-                        setter(new BigNumber(event.target.value));
-                    } else {
-                        setter(new BigNumber(-1));
-                    }
-                }}
-                onBlur={() => {
-                    if (value.isNegative()) {
-                        setter(new BigNumber(0))
-                    }
-                }}
-                disabled={disabled}
-            />
+            <Box pr={2}>
+                <TextField
+                    size='small'
+                    type="number"
+                    value={value.isNegative() ? '' : value.toFixed()}
+                    onChange={(event) => {
+                        if (event.target.value) {
+                            setter(new BigNumber(event.target.value));
+                        } else {
+                            setter(new BigNumber(-1));
+                        }
+                    }}
+                    onBlur={() => {
+                        if (value.isNegative()) {
+                            setter(new BigNumber(0))
+                        }
+                    }}
+                    disabled={disabled}
+                />
+            </Box>
         </>
     );
 }

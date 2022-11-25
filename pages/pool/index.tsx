@@ -257,39 +257,47 @@ const Pool = ({ user }: { user: string }) => {
                 </Box>
             </div>
 
-            <WithdrawDeposit
-                poolAddress={poolAddress}
-                user={user}
-                balance={userUNIBalance}
-                allowance={userUNIAllowance}
-                stagedBalance={userStagedBalance}
-                status={userStatus}
-            />
+            <Box>
+                <WithdrawDeposit
+                    poolAddress={poolAddress}
+                    user={user}
+                    balance={userUNIBalance}
+                    allowance={userUNIAllowance}
+                    stagedBalance={userStagedBalance}
+                    status={userStatus}
+                />
+            </Box>
 
-            <BondUnbond
-                poolAddress={poolAddress}
-                staged={userStagedBalance}
-                bonded={userBondedBalance}
-                status={userStatus}
-                lockup={lockup}
-            />
+            <Box pt={2}>
+                <BondUnbond
+                    poolAddress={poolAddress}
+                    staged={userStagedBalance}
+                    bonded={userBondedBalance}
+                    status={userStatus}
+                    lockup={lockup}
+                />
+            </Box>
 
-            <Claim
-                poolAddress={poolAddress}
-                claimable={userClaimableBalance}
-                status={userStatus}
-            />
+            <Box pt={2}>
+                <Claim
+                    poolAddress={poolAddress}
+                    claimable={userClaimableBalance}
+                    status={userStatus}
+                />
+            </Box>
 
-            <Provide
-                poolAddress={poolAddress}
-                user={user}
-                rewarded={isRewardedNegative ? new BigNumber(0) : userRewardedBalance}
-                status={userStatus}
-                pairBalanceESD={pairBalanceESD}
-                pairBalanceUSDC={pairBalanceUSDC}
-                userUSDCBalance={userUSDCBalance}
-                userUSDCAllowance={userUSDCAllowance}
-            />
+            <Box pt={2}>
+                <Provide
+                    poolAddress={poolAddress}
+                    user={user}
+                    rewarded={isRewardedNegative ? new BigNumber(0) : userRewardedBalance}
+                    status={userStatus}
+                    pairBalanceESD={pairBalanceESD}
+                    pairBalanceUSDC={pairBalanceUSDC}
+                    userUSDCBalance={userUSDCBalance}
+                    userUSDCAllowance={userUSDCAllowance}
+                />
+            </Box>
         </>
     )
 }
