@@ -67,13 +67,12 @@ const HomePage = ({ user }: HomePageProps) => {
         async function updateUserInfo() {
             try {
                 const stats: any = await getStats();
-                console.log(stats);
                 setPrice(stats.tPrice);
                 setForgeYield(stats.forgeYield);
                 setPoolYield(stats.poolYield);
                 setForgeTotal(stats.forgeTvl);
                 setPoolTotal(stats.poolTvl);
-                setTotalTvl(stats.totalTvl);
+                setTotalTvl(stats.totalTVL);
             } catch (error) {
                 console.log(error);
             }

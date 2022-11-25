@@ -1,5 +1,5 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAccount } from "wagmi";
 import styles from "./NavBar.module.scss";
 import Link from "next/link";
@@ -13,11 +13,14 @@ type NavbarProps = {
 };
 
 const NavBar = ({ hasWeb3, user, setUser }: NavbarProps) => {
+
     const { address, isConnected } = useAccount();
 
-    if (isConnected) {
-        setUser(address);
-    }
+    useEffect(() => {
+        if (isConnected) {
+            setUser(address);
+        }
+    }, [isConnected])
 
     return (
         <>
