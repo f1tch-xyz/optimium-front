@@ -4,6 +4,7 @@ import { useAccount } from "wagmi";
 import styles from "./NavBar.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Box from "@mui/material/Box";
 
 type NavbarProps = {
     hasWeb3: boolean;
@@ -32,7 +33,9 @@ const NavBar = ({ hasWeb3, user, setUser }: NavbarProps) => {
                 <div className={styles.nav_wrapper}>
                     <div style={{ display: "flex" }}>
                         <Link href="/" style={{ marginRight: "16px", height: "80px" }}>
-                            LOGO
+                            <Box sx={{ cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'black', color: 'white', height: "30px", width: "100px" }}>
+                                OPTIMIUM
+                            </Box>
                         </Link>
                     </div>
                     <div style={{ display: "flex", width: '50%' }}>
