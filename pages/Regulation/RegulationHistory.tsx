@@ -112,17 +112,20 @@ function RegulationHistory({ user }: RegulationHistoryProps) {
             }
         }
 
-        setRows(regulations.map((reg: any) => renderEntry(reg)));
 
         updateUserInfo()
         const id = setInterval(updateUserInfo, 15000)
+
+        if (regulations) {
+            setRows(regulations.map((reg: any) => renderEntry(reg)));
+        }
 
         // eslint-disable-next-line consistent-return
         return () => {
             isCancelled = true
             clearInterval(id)
         }
-    }, []);
+    }, [regulations]);
 
     const columns: GridColDef[] = [
         { field: 'epoch', headerName: 'Epoch', minWidth: 150 },

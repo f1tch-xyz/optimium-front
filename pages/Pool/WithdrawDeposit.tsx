@@ -40,7 +40,7 @@ function WithdrawDeposit({
                 STAGE
             </Box>
             <Box px={2}>
-                {allowance.comparedTo(MAX_UINT256) === 0 ? (
+                {allowance && allowance.comparedTo(MAX_UINT256) === 0 ? (
                     <div className={styles.wrapper}>
                         {/* total Issued */}
                         <div style={{ whiteSpace: 'nowrap' }}>
@@ -152,6 +152,7 @@ function WithdrawDeposit({
                         <a
                             href="https://curve.fi/#/ethereum/pools/factory-v2-229/deposit"
                             target="_blank"
+                            rel="noreferrer"
                         >
                             here
                         </a>{' '}

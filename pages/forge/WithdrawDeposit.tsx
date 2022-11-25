@@ -36,7 +36,7 @@ function WithdrawDeposit({
                 STAGE
             </Box>
             <Box px={2}>
-                {allowance.comparedTo(MAX_UINT256) === 0 ? (
+                {allowance && allowance.comparedTo(MAX_UINT256) === 0 ? (
                     <div className={styles.wrapper}>
                         {/* total Issued */}
                         <div style={{ flexBasis: '32%' }}>
@@ -142,6 +142,7 @@ function WithdrawDeposit({
                         <a
                             href="https://curve.fi/#/ethereum/pools/factory-v2-229/swap"
                             target="_blank"
+                            rel="noreferrer"
                         >
                             here
                         </a>{' '}

@@ -39,9 +39,7 @@ function Provide({
     const [provideAmount, setProvideAmount] = useState(new BigNumber(0))
     const [usdcAmount, setUsdcAmount] = useState(new BigNumber(0))
 
-    const USDCToESDRatio = pairBalanceUSDC.isZero()
-        ? new BigNumber(1)
-        : pairBalanceUSDC.div(pairBalanceESD)
+    const USDCToESDRatio = pairBalanceUSDC?.isZero() ? new BigNumber(1) : pairBalanceUSDC?.div(pairBalanceESD)
 
     const onChangeAmountESD = (amountESD: any) => {
         if (!amountESD) {
@@ -61,7 +59,7 @@ function Provide({
                 PROVIDE
             </Box>
             <Box px={2}>
-                {userUSDCAllowance.comparedTo(MAX_UINT256.dividedBy(2)) > 0 ? (
+                {userUSDCAllowance?.comparedTo(MAX_UINT256.dividedBy(2)) > 0 ? (
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                         {/* total rewarded */}
                         <div style={{ flexBasis: '32%' }}>

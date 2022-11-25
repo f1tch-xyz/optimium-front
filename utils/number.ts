@@ -33,7 +33,7 @@ export const ownership = (
   balance: BigNumber,
   totalSupply: BigNumber
 ): BigNumber => {
-  return balance.multipliedBy(new BigNumber(100)).dividedBy(totalSupply)
+  return balance?.multipliedBy(new BigNumber(100)).dividedBy(totalSupply)
 }
 
 /**
@@ -71,7 +71,7 @@ function pad(bnStr:any, position:any) {
 }
 
 export function formatMoney(n: any) {
-  n = n.toPrecision(3)
+  n = n?.toPrecision(3)
   return Math.abs(Number(n)) >= 1.0e9
     ? Math.abs(Number(n)) / 1.0e9 + 'B'
     : Math.abs(Number(n)) >= 1.0e6

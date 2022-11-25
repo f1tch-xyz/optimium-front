@@ -37,7 +37,7 @@ function Distribution({ heading, items }: any) {
                 {items.map(({ item, percentage }: any, index: any) => {
                     const color = colors[index % colors.length];
                     return (
-                        <Box p={1}>
+                        <Box key={index} p={1}>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', lineHeight: '15px' }}>
                                     <div style={{ height: '10px', width: '10px', borderRadius: '50%', backgroundColor: colors[index], marginRight: '5px' }}></div>
