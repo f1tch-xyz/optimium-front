@@ -33,7 +33,7 @@ function BondUnbond({
     const [unbondAmount, setUnbondAmount] = useState(new BigNumber(0))
 
     return (
-        <Box height={200} border={'1px solid black'} className={styles.box_custom_style}>
+        <Box border={'1px solid black'} className={styles.box_custom_style}>
             <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
                 FORGE
             </Box>
@@ -46,24 +46,24 @@ function BondUnbond({
                             <BalanceBlock asset="Bonded" balance={bonded} suffix={'T-3CRV'} />
                         </div>
                     </div>
-                    <div className={styles.button_wrapper}>
-                        {/* Bond UNI-V2 within Pool */}
+                    <Box>
                         <div style={{ display: 'flex' }}>
-                            <div style={{ width: '60%', minWidth: '6em' }}>
-                                <>
-                                    <BigNumberInput
-                                        adornment="T-3CRV"
-                                        value={bondAmount}
-                                        setter={setBondAmount}
-                                    />
-                                    <MaxButton
-                                        onClick={() => {
-                                            setBondAmount(staged)
-                                        }}
-                                    />
-                                </>
-                            </div>
-                            <div style={{ width: '40%', minWidth: '7em' }}>
+                            {/* Bond UNI-V2 within Pool */}
+                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                <div style={{ width: '60%', minWidth: '6em' }}>
+                                    <>
+                                        <BigNumberInput
+                                            adornment="T-3CRV"
+                                            value={bondAmount}
+                                            setter={setBondAmount}
+                                        />
+                                        <MaxButton
+                                            onClick={() => {
+                                                setBondAmount(staged)
+                                            }}
+                                        />
+                                    </>
+                                </div>
                                 <Button
                                     startIcon={status === 0 ? <AddIcon /> : <WarningAmberIcon />}
                                     onClick={() => {
@@ -77,25 +77,23 @@ function BondUnbond({
                                     Bond
                                 </Button>
                             </div>
-                        </div>
-                        <div style={{ flexBasis: '2%' }} />
-                        {/* Unbond UNI-V2 within Pool */}
-                        <div style={{ display: 'flex' }}>
-                            <div style={{ width: '60%', minWidth: '6em' }}>
-                                <>
-                                    <BigNumberInput
-                                        adornment="T-3CRV"
-                                        value={unbondAmount}
-                                        setter={setUnbondAmount}
-                                    />
-                                    <MaxButton
-                                        onClick={() => {
-                                            setUnbondAmount(bonded)
-                                        }}
-                                    />
-                                </>
-                            </div>
-                            <div style={{ width: '40%', minWidth: '7em' }}>
+                            <div style={{ flexBasis: '2%' }} />
+                            {/* Unbond UNI-V2 within Pool */}
+                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                <div style={{ width: '60%', minWidth: '6em' }}>
+                                    <>
+                                        <BigNumberInput
+                                            adornment="T-3CRV"
+                                            value={unbondAmount}
+                                            setter={setUnbondAmount}
+                                        />
+                                        <MaxButton
+                                            onClick={() => {
+                                                setUnbondAmount(bonded)
+                                            }}
+                                        />
+                                    </>
+                                </div>
                                 <Button
                                     startIcon={status === 0 ? <RemoveIcon /> : <WarningAmberIcon />}
                                     onClick={() => {
@@ -110,9 +108,9 @@ function BondUnbond({
                                 </Button>
                             </div>
                         </div>
-                    </div>
+                    </Box>
                 </div>
-                <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>
+                <div style={{ width: '100%', paddingTop: '2%', marginBottom: '5px', textAlign: 'center' }}>
                     <span style={{ opacity: 0.5 }}>
                         {' '}
                         Bonding events will restart the lockup timer (Exit lockup: {

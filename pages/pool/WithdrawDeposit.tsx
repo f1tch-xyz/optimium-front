@@ -35,7 +35,7 @@ function WithdrawDeposit({
     const [withdrawAmount, setWithdrawAmount] = useState(new BigNumber(0))
 
     return (
-        <Box height={165} border={'1px solid black'} className={styles.box_custom_style} >
+        <Box border={'1px solid black'} className={styles.box_custom_style} >
             <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
                 STAGE
             </Box>
@@ -125,7 +125,7 @@ function WithdrawDeposit({
                 ) : (
                     <div className={styles.wrapper}>
                         {/* total Issued */}
-                        <div style={{ whiteSpace: 'nowrap' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', flexBasis: '32%' }}>
                             <BalanceBlock
                                 asset="Staged"
                                 balance={stagedBalance}
@@ -134,7 +134,7 @@ function WithdrawDeposit({
                         </div>
                         <div style={{ flexBasis: '35%' }} />
                         {/* Approve Pool to spend UNI-V2 */}
-                        <div style={{ flexBasis: '33%', paddingTop: '2%' }}>
+                        <div className={styles.button_wrapper}>
                             <Button
                                 startIcon={<AddIcon />}
                                 onClick={() => {
@@ -146,7 +146,7 @@ function WithdrawDeposit({
                         </div>
                     </div>
                 )}
-                <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>
+                <div style={{ width: '100%', paddingTop: '2%', marginBottom: '5px', textAlign: 'center' }}>
                     <span style={{ opacity: 0.5 }}>
                         Get your T-3CRV LP{' '}
                         <a

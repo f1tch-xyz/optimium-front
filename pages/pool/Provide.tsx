@@ -54,13 +54,13 @@ function Provide({
     }
 
     return (
-        <Box height={165} border={'1px solid black'} className={styles.box_custom_style}>
+        <Box border={'1px solid black'} className={styles.box_custom_style}>
             <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
                 PROVIDE
             </Box>
             <Box px={2}>
                 {userUSDCAllowance?.comparedTo(MAX_UINT256.dividedBy(2)) > 0 ? (
-                    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', height: '100px', alignItems: 'center', flexWrap: 'wrap' }}>
                         {/* total rewarded */}
                         <div style={{ flexBasis: '32%' }}>
                             <BalanceBlock asset="Rewarded" balance={rewarded} suffix={'T'} />
@@ -123,12 +123,12 @@ function Provide({
                         </div>
                     </div>
                 ) : (
-                    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', height: '100px', alignItems: 'center', flexWrap: 'wrap' }}>
                         {/* total rewarded */}
                         <div style={{ flexBasis: '32%' }}>
                             <BalanceBlock asset="Rewarded" balance={rewarded} suffix={'T'} />
                         </div>
-                        <div style={{ flexBasis: '33%' }}>
+                        <div style={{ flexBasis: '33%', textAlign: 'center' }}>
                             <BalanceBlock
                                 asset="3CRV Balance"
                                 balance={userUSDCBalance}
@@ -137,7 +137,7 @@ function Provide({
                         </div>
                         <div style={{ flexBasis: '2%' }} />
                         {/* Approve Pool to spend USDC */}
-                        <div style={{ flexBasis: '33%', paddingTop: '2%' }}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', flexBasis: '33%' }}>
                             <Button
                                 startIcon={<AddIcon />}
                                 onClick={() => {
@@ -149,7 +149,7 @@ function Provide({
                         </div>
                     </div>
                 )}
-                <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>
+                <div style={{ width: '100%', paddingTop: '2%', marginBottom: '5px', textAlign: 'center' }}>
                     <span style={{ opacity: 0.5 }}>
                         {' '}
                         Zap your rewards directly to LP by providing equal 3CRV{' '}

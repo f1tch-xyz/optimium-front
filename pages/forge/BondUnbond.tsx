@@ -36,7 +36,6 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-
                         <Box>
                             {/* Bond Døllar within DAO */}
                             <div style={{ display: 'flex' }}>
