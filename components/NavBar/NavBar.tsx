@@ -42,7 +42,7 @@ const NavBar = ({ hasWeb3, user, setUser }: NavbarProps) => {
                             <LinkButton title="Regulation" to="/regulation" />
                             <LinkButton title="Epoch" to="/epoch" />
                             <LinkButton title="Trade" to="/trade" />
-                            <LinkButton title="Coupons" to="/coupons" />
+                            {/* <LinkButton title="Coupons" to="/coupons" /> */}
                         </div>
                     </div>
                     <div style={{ display: "flex", justifyContent: "end" }}>
