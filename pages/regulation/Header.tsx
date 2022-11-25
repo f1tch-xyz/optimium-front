@@ -51,9 +51,10 @@ const RegulationHeader = ({
         <>
             <div className={styles.history_wrapper}>
                 <div className={styles.history_content}>
-                    <Box
-                        className={styles.history_box}>
-                        Supply allocation
+                    <Box pb={1} className={styles.history_box}>
+                        <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
+                            SUPPLY ALLOCATION
+                        </Box>
                         <Distribution
                             heading={`T ${formatMoney(totalSupply?.toNumber())}`}
                             items={[
@@ -74,9 +75,10 @@ const RegulationHeader = ({
                     </Box>
                 </div>
                 <div className={styles.history_content}>
-                    <Box
-                        className={styles.history_box}>
-                        Forge breakdown
+                    <Box pb={1} className={styles.history_box}>
+                        <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
+                            FORGE BREAKDOWN
+                        </Box>
                         <Distribution
                             heading={`T ${formatMoney(daoTotalSupply?.toNumber())}`}
                             items={[
@@ -97,9 +99,10 @@ const RegulationHeader = ({
                     </Box>
                 </div>
                 <div className={styles.history_content}>
-                    <Box
-                        className={styles.history_box}>
-                        Pool breakdown
+                    <Box pb={1} className={styles.history_box}>
+                        <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
+                            POOL BREAKDOWN
+                        </Box>
                         <Distribution
                             heading={`T ${formatMoney(poolTotalSupply?.toNumber())}`}
                             items={[
