@@ -7,6 +7,7 @@ import { Route, Router, Routes } from 'react-router-dom';
 import Forge from './Forge';
 import Pool from './Pool';
 import Regulation from './Regulation';
+import Epoch from './Epoch';
 
 const Home: NextPage = () => {
 
@@ -17,7 +18,8 @@ const Home: NextPage = () => {
     <>
       <NavBar hasWeb3={hasWeb3} user={user} setUser={setUser} />
       {/* <Pool user={user} /> */}
-      <Regulation user={user} />
+      {/* <Regulation user={user} /> */}
+      <Epoch user={user} />
     </>
   );
 };

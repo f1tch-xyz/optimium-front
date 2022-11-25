@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: 33% 33% 33%;
     align-items: center;
+    justify-content: space-around;
 }
 
 .history_content {
@@ -36,10 +37,8 @@
 
     .data_view {
         margin: 0 15px 0 15px;
-        border-radius: 4px;
-        border-style: solid;
-        border-width: 0 1px;
-        color: #212B36;
+        border-radius: 0px!important;
+        border: 1px solid red;
     }
 }
 

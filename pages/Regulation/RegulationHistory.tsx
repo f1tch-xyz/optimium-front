@@ -7,6 +7,7 @@ import BigNumber from 'bignumber.js'
 import styles from './Regulation.module.scss'
 import { parseEther } from 'ethers/lib/utils'
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { uuid } from 'uuidv4';
 
 type RegulationHistoryProps = {
     user: string
@@ -28,12 +29,6 @@ type RegulationEntry = {
 }
 
 function formatPrice(type: any, data: any) {
-    // console.log(
-    //   data.epoch.toString(),
-    //   data.price.toString(),
-    //   data.price.sub('978297737593846773').toString(),
-    //   console.log(data.lessDebt.toString())
-    // )
     if (type === 'INCREASE') {
         return `+${formatBN(
             toTokenUnitsBN(data.price.sub('978297737593846773'), ESD.decimals),
@@ -76,19 +71,21 @@ function formatDeltaBonded(type: any, data: any) {
         : '+0.00'
 }
 
-function renderEntry({ type, data, totalDebt }: Regulation): string[] {
-    return [
-        data.epoch.toString(),
-        formatPrice(type, data),
-        formatDeltaRedeemable(type, data),
-        formatDeltaDebt(type, data, totalDebt),
-        formatDeltaBonded(type, data),
-    ]
+function renderEntry({ type, data, totalDebt }: Regulation): any {
+    return {
+        id: uuid(),
+        epoch: data.epoch.toString(),
+        price: formatPrice(type, data),
+        deltaRedeemable: formatDeltaRedeemable(type, data),
+        deltaDebt: formatDeltaDebt(type, data, totalDebt),
+        deltaBonded: formatDeltaBonded(type, data)
+    }
 }
 
 function RegulationHistory({ user }: RegulationHistoryProps) {
     const [epoch, setEpoch] = useState(0)
     const [regulations, setRegulations] = useState<Regulation[]>([])
+    const [rows, setRows] = useState<any[]>([])
     const [page, setPage] = useState(0)
     const [initialized, setInitialized] = useState(false)
 
@@ -97,43 +94,28 @@ function RegulationHistory({ user }: RegulationHistoryProps) {
         let isCancelled = false
 
         async function updateUserInfo() {
-            const [
-                allRegulations,
-                totalDebt,
-                // epoch
-            ] = await Promise.all([
+            const [allRegulations, totalDebt] = await Promise.all([
                 getAllRegulations(ESDS.addr),
-                getTotalDebt(ESDS.addr),
-                // getEpoch(ESDS.addr),
-            ])
-
-            console.log('allRegulations', allRegulations);
-            console.log('totalDebt', totalDebt);
-
+                getTotalDebt(ESDS.addr)
+            ]);
 
             if (!isCancelled) {
-                setRegulations(
-                    allRegulations.map((reg: any, index: any) => {
-                        if (reg.data.epoch.gte(672)) {
-                            reg.id = index
-                            reg.bootstrap = true
-                            reg.totalDebt = totalDebt
-                        }
-                        return reg
-                    })
-                )
+                setRegulations(allRegulations.map((reg: any) => {
+                    if (reg.data.epoch.gte(672)) {
+                        reg.bootstrap = true
+                        reg.totalDebt = totalDebt
+                    }
+                    return reg;
+                }));
 
-                setInitialized(true)
+                setInitialized(true);
             }
-
-            console.log('regulations', regulations);
-
         }
+
+        setRows(regulations.map((reg: any) => renderEntry(reg)));
 
         updateUserInfo()
         const id = setInterval(updateUserInfo, 15000)
-
-
 
         // eslint-disable-next-line consistent-return
         return () => {
@@ -143,47 +125,24 @@ function RegulationHistory({ user }: RegulationHistoryProps) {
     }, []);
 
     const columns: GridColDef[] = [
-        {
-            field: 'data.epoch', headerName: 'Epoch', width: 120, valueGetter: (params: GridValueGetterParams) => {
-                return params.row.data[0].toString()
-            }
-        },
-        {
-            field: 'data.peg', headerName: 'Peg', width: 200, valueGetter: (params: GridValueGetterParams) => {
-                // return params.row.data.newDebt.toString()
-                return params.row.data[1].toString()
-            }
-        },
-        {
-            field: 'data.redeemable', headerName: 'Redeemable', width: 120, valueGetter: (params: GridValueGetterParams) => {
-                return params.row.data[2].toString()
-            }
-        },
-        {
-            field: 'data.price', headerName: 'Price', width: 120, valueGetter: (params: GridValueGetterParams) => {
-                return params.row.data.price.toString()
-            }
-        },
-        {
-            field: 'data.totalDebt', headerName: 'Price', width: 120, valueGetter: (params: GridValueGetterParams) => {
-                return params.row.totalDebt.toString()
-            }
-        }
+        { field: 'epoch', headerName: 'Epoch', minWidth: 150 },
+        { field: 'price', headerName: 'Price', minWidth: 150 },
+        { field: 'deltaRedeemable', headerName: 'Redeemable', minWidth: 150 },
+        { field: 'deltaDebt', headerName: 'Debt', minWidth: 150 },
+        { field: 'deltaBonded', headerName: 'Bonded', minWidth: 150 },
     ];
 
     return (
         <div
             className={styles.data_view}>
-
-            {initialized ? 'default' : 'loading'}
-            <div style={{ height: 800, width: '100%' }}>
+            Regulation History
+            <div style={{ height: 600, width: '100%' }}>
                 <DataGrid
-                    rows={regulations}
                     loading={!initialized}
+                    rows={rows}
                     columns={columns}
-                    pageSize={50}
-                    rowsPerPageOptions={[50]}
-                    checkboxSelection
+                    pageSize={10}
+                    rowsPerPageOptions={[10]}
                 />
             </div>
         </div>
