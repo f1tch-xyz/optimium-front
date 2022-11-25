@@ -23,7 +23,7 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
     const [unbondAmount, setUnbondAmount] = useState(new BigNumber(0))
 
     return (
-        <Box height={185} border={'1px solid black'} className={styles.box_custom_style}>
+        <Box border={'1px solid black'} className={styles.box_custom_style}>
             <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
                 FORGE
             </Box>
@@ -108,7 +108,7 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
                         </Box>
                     </div>
                 </div>
-                <div style={{ width: '100%', paddingTop: '2%', textAlign: 'center' }}>
+                <div style={{ width: '100%', paddingTop: '2%', marginBottom: '5px', textAlign: 'center' }}>
                     <span style={{ opacity: 0.5 }}>
                         {' '}
                         Bonding events will restart the lockup timer (Exit lockup: {

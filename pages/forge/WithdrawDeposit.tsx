@@ -31,7 +31,7 @@ function WithdrawDeposit({
     const [withdrawAmount, setWithdrawAmount] = useState(new BigNumber(0))
 
     return (
-        <Box height={165} border={'1px solid black'}>
+        <Box border={'1px solid black'}>
             <Box px={2} height={32} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'start'} borderBottom={'1px solid black'}>
                 STAGE
             </Box>
@@ -136,7 +136,7 @@ function WithdrawDeposit({
                         </div>
                     </div>
                 )}
-                <div style={{ width: '100%', textAlign: 'center' }}>
+                <div style={{ width: '100%', paddingTop: '2%', marginBottom: '5px', textAlign: 'center' }}>
                     <span style={{ opacity: 0.5 }}>
                         Get your T tokens{' '}
                         <a
