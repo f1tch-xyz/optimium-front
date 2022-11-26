@@ -580,7 +580,7 @@ export const getReserves = async () => {
 
 export const getThreeCRVPrice = async () => {
   const threePool = new Contract(
-    "0xbebc44782c7db0a1a60cb6fe97d0b483032ff1c7",
+    "0x1337bedc9d22ecbe766df105c9623922a27963ec",
     metapoolAbi,
     await getProvider()
   );
@@ -594,7 +594,7 @@ export const getThreeCRVPrice = async () => {
 export const getInstantaneousPrice = async () => {
   const provider = await getProvider();
   const exchange = new Contract(UNI.addr, metapoolAbi, provider);
-  const threePool = new Contract("0xbebc44782c7db0a1a60cb6fe97d0b483032ff1c7", metapoolAbi, provider);
+  const threePool = new Contract("0x1337bedc9d22ecbe766df105c9623922a27963ec", metapoolAbi, provider);
 
   try {
     const [threeCRVPrice, TPrice] = await Promise.all([
