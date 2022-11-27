@@ -50,27 +50,28 @@ function WithdrawDeposit({
                                 suffix={'T-3CRV'}
                             />
                         </div>
-                        {/* Deposit UNI-V2 into Pool */}
-                        <div className={styles.button_wrapper}>
+                        <Box>
                             <div style={{ display: 'flex' }}>
-                                <div style={{ width: '60%', minWidth: '6em' }}>
-                                    <>
-                                        <BigNumberInput
-                                            adornment="T-3CRV"
-                                            value={depositAmount}
-                                            setter={setDepositAmount}
-                                            disabled={status !== 0}
-                                        />
-                                        <MaxButton
-                                            onClick={() => {
-                                                setDepositAmount(balance)
-                                            }}
-                                        />
-                                    </>
-                                </div>
-                                <div style={{ width: '40%', minWidth: '7em' }}>
+                                {/* Deposit UNI-V2 into Pool */}
+                                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                    <div style={{ width: '60%', minWidth: '6em' }}>
+                                        <>
+                                            <BigNumberInput
+                                                adornment="T-3CRV"
+                                                value={depositAmount}
+                                                setter={setDepositAmount}
+                                                disabled={status !== 0}
+                                            />
+                                            <MaxButton
+                                                onClick={() => {
+                                                    setDepositAmount(balance)
+                                                }}
+                                            />
+                                        </>
+                                    </div>
                                     <Button
                                         startIcon={status === 0 ? <AddIcon /> : <HttpsIcon />}
+                                        sx={{ height: '40px' }}
                                         onClick={() => {
                                             depositPool(
                                                 poolAddress,
@@ -84,28 +85,27 @@ function WithdrawDeposit({
                                         Deposit
                                     </Button>
                                 </div>
-                            </div>
-                            <div style={{ flexBasis: '2%' }} />
-                            {/* Withdraw Døllar from DAO */}
-                            <div style={{ display: 'flex' }}>
-                                <div style={{ width: '60%', minWidth: '6em' }}>
-                                    <>
-                                        <BigNumberInput
-                                            adornment="T-3CRV"
-                                            value={withdrawAmount}
-                                            setter={setWithdrawAmount}
-                                            disabled={status !== 0}
-                                        />
-                                        <MaxButton
-                                            onClick={() => {
-                                                setWithdrawAmount(stagedBalance)
-                                            }}
-                                        />
-                                    </>
-                                </div>
-                                <div style={{ width: '40%', minWidth: '7em' }}>
+                                <div style={{ flexBasis: '2%' }} />
+                                {/* Withdraw Døllar from DAO */}
+                                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                    <div style={{ width: '60%', minWidth: '6em' }}>
+                                        <>
+                                            <BigNumberInput
+                                                adornment="T-3CRV"
+                                                value={withdrawAmount}
+                                                setter={setWithdrawAmount}
+                                                disabled={status !== 0}
+                                            />
+                                            <MaxButton
+                                                onClick={() => {
+                                                    setWithdrawAmount(stagedBalance)
+                                                }}
+                                            />
+                                        </>
+                                    </div>
                                     <Button
                                         startIcon={status === 0 ? <RemoveIcon /> : <HttpsIcon />}
+                                        sx={{ height: '40px' }}
                                         onClick={() => {
                                             withdrawPool(
                                                 poolAddress,
@@ -120,7 +120,7 @@ function WithdrawDeposit({
                                     </Button>
                                 </div>
                             </div>
-                        </div>
+                        </Box>
                     </div>
                 ) : (
                     <div className={styles.wrapper}>
