@@ -1,5 +1,5 @@
 export const UNI = {
-  addr: "0x6eFb0bdCf3e89Cfa175E3FDAB7AF415fA53833b7",
+  addr: "0xAE13DFf69D84d87aE50ad841377d5F9d33d857Cf",
   decimals: 18,
   symbol: "T-3CRV",
 };
