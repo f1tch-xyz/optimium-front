@@ -75,8 +75,8 @@ function Provide({
                         <div style={{ flexBasis: '2%' }} />
                         {/* Provide liquidity using Pool rewards */}
                         <div style={{ flexBasis: '33%', paddingTop: '2%' }}>
-                            <div style={{ display: 'flex' }}>
-                                <div style={{ width: '60%', minWidth: '6em' }}>
+                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                <div>
                                     <>
                                         <BigNumberInput
                                             adornment="T"
@@ -91,7 +91,7 @@ function Provide({
                                         />
                                     </>
                                 </div>
-                                <div style={{ width: '40%', minWidth: '6em' }}>
+                                <div>
                                     <Button
                                         startIcon={
                                             poolAddress === '' ||

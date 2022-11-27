@@ -11,8 +11,8 @@ import UniswapPool from './trade';
 import { useState } from 'react';
 import NavBar from '../components/NavBar/NavBar';
 
-const { chains, provider } = configureChains([chain.mainnet], [
-  alchemyProvider({ apiKey: 'A_kmxXLW8oR7ot5VEGBQYpMD9WxyQtHb' }),
+const { chains, provider } = configureChains([chain.optimism], [
+  alchemyProvider({ apiKey: 'I_98yCaFloxo_XxxRCjQ1tanl4IcVXs3' }),
   publicProvider()
 ]);
 
