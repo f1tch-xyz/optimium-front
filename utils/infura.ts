@@ -502,7 +502,7 @@ export const getAllProposals = async (dao: any) => {
 export const getAllRegulations = async (dao: any) => {
   const daoContract = new Contract(dao, daoAbi, provider);
   const block = await provider.getBlockNumber();
-  const blockNumber = block - 3000;
+  const blockNumber = block - 300000;
   const increaseP = daoContract.queryFilter(
     daoContract.filters.SupplyIncrease(),
     blockNumber
