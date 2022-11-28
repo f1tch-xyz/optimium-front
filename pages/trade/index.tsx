@@ -69,7 +69,7 @@ const UniswapPool = ({ user }: { user: string }) => {
                             <BarChartIcon fontSize='large' />
                         </div>
                         <div className={styles.description}>
-                            View T-3CRV pool stats.
+                            View OD-3CRV pool stats.
                         </div>
                     </a>
                 </Box>
@@ -83,7 +83,7 @@ const UniswapPool = ({ user }: { user: string }) => {
                             <ImportExportIcon fontSize='large' />
                         </div>
                         <div className={styles.description}>
-                            Trade T tokens.
+                            Trade OD tokens.
                         </div>
                     </a>
                 </Box>

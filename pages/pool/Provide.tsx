@@ -63,7 +63,7 @@ function Provide({
                     <div style={{ display: 'flex', height: '100px', alignItems: 'center', flexWrap: 'wrap' }}>
                         {/* total rewarded */}
                         <div style={{ flexBasis: '32%' }}>
-                            <BalanceBlock asset="Rewarded" balance={rewarded} suffix={'T'} />
+                            <BalanceBlock asset="Rewarded" balance={rewarded} suffix={'OD'} />
                         </div>
                         <div style={{ flexBasis: '33%' }}>
                             <BalanceBlock
@@ -126,7 +126,7 @@ function Provide({
                     <div style={{ display: 'flex', height: '100px', alignItems: 'center', flexWrap: 'wrap' }}>
                         {/* total rewarded */}
                         <div style={{ flexBasis: '32%' }}>
-                            <BalanceBlock asset="Rewarded" balance={rewarded} suffix={'T'} />
+                            <BalanceBlock asset="Rewarded" balance={rewarded} suffix={'OD'} />
                         </div>
                         <div style={{ flexBasis: '33%', textAlign: 'center' }}>
                             <BalanceBlock

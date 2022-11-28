@@ -93,7 +93,7 @@ const HomePage = ({ user }: HomePageProps) => {
             <Grid container>
                 <Grid item xs={4}>
                     <Box className={Style.stat_container} height={150} border={1}>
-                        <div style={{ fontSize: 16, padding: 3 }}>T Price</div>
+                        <div style={{ fontSize: 16, padding: 3 }}>OD Price</div>
                         <div
                             style={{
                                 fontSize: 24,

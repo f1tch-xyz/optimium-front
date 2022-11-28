@@ -34,20 +34,20 @@ const AccountPageHeader = ({
 }: AccountPageHeaderProps) => (
     <div className={styles.header_container}>
         <div className={styles.header_content}>
-            <BalanceBlock asset="Balance" balance={accountESDBalance} suffix={' T'} />
+            <BalanceBlock asset="Balance" balance={accountESDBalance} suffix={' OD'} />
         </div>
         <div className={styles.header_content}>
             <BalanceBlock
                 asset="Staged"
                 balance={accountStagedBalance}
-                suffix={' T'}
+                suffix={' OD'}
             />
         </div>
         <div className={styles.header_content}>
             <BalanceBlock
                 asset="Bonded"
                 balance={accountBondedBalance}
-                suffix={' T'}
+                suffix={' OD'}
             />
         </div>
         <div className={styles.header_content}>

@@ -23,14 +23,14 @@ const TradePageHeader = ({
     return (
         <div className={styles.stats}>
             <Box width={'25%'}>
-                <BalanceBlock asset="T Price" balance={price} suffix={'USD'} />
+                <BalanceBlock asset="OD Price" balance={price} suffix={'USD'} />
             </Box>
 
             <Box width={'25%'}>
                 <BalanceBlock
-                    asset="T Liquidity"
+                    asset="OD Liquidity"
                     balance={pairBalanceESD}
-                    suffix={'T'}
+                    suffix={'OD'}
                 />
             </Box>
 

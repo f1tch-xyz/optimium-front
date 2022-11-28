@@ -79,7 +79,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </RainbowKitProvider>
       </WagmiConfig>
 
-      <Snackbar
+      {/* <Snackbar
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
@@ -91,7 +91,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           This is an error message!
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
       {/* </Provider> */}
     </>
   );
