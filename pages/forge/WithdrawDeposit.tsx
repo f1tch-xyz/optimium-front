@@ -143,7 +143,7 @@ function WithdrawDeposit({
                     <span style={{ opacity: 0.5 }}>
                         Get your OD tokens{' '}
                         <a
-                            href="https://curve.fi/#/ethereum/pools/factory-v2-229/swap"
+                            href="https://curve.fi/#/optimism/pools/factory-v2-38/swap"
                             target="_blank"
                             rel="noreferrer">
                             here

@@ -150,7 +150,7 @@ function WithdrawDeposit({
                     <span style={{ opacity: 0.5 }}>
                         Get your T-3CRV LP{' '}
                         <a
-                            href="https://curve.fi/#/ethereum/pools/factory-v2-229/deposit"
+                            href="https://curve.fi/#/optimism/pools/factory-v2-38/deposit"
                             target="_blank"
                             rel="noreferrer"
                         >
