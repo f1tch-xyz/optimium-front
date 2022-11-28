@@ -2,8 +2,8 @@ import BigNumber from "bignumber.js";
 import { UniswapV2Router02 } from "../constants/contracts";
 import { ESD, ESDS, UNI, USDC } from "../constants/tokens";
 import { POOL, POOL_EXIT_LOCKUP_EPOCHS } from "../constants/values";
-import { Contract } from "ethers";
-import { getProvider } from "@wagmi/core";
+import { Contract, ethers } from "ethers";
+// import { getProvider } from "@wagmi/core";
 import { formatBN, toBaseUnitBN, toTokenUnitsBN } from "./number";
 import { formatEther, parseEther } from "ethers/lib/utils";
 
@@ -18,6 +18,8 @@ import curve from "../constants/abi/curve.json";
 // const daoAbi = require('../constants/abi/Implementation.json')
 let daoAbi = dao.abi;
 let titaniumAbi = titanium.abi;
+let metaPoolAbi = metaPool.abi as any;
+
 // const poolAbi = require('../constants/abi/Pool.json')
 let poolAbi = pool.abi;
 // const poolFactoryAbi = require('../constants/abi/PoolFactory.json')
@@ -27,23 +29,27 @@ let uniswapRouterAbi = uniswapV2Router02.abi;
 // const metapoolAbi = require('../constants/abi/IMetaPool.json')
 let metapoolAbi = metaPool.abi as any;
 
+let provider = new ethers.providers.AlchemyProvider(
+  "optimism",
+  "I_98yCaFloxo_XxxRCjQ1tanl4IcVXs3"
+);
+
 /**
  *
  * @param {string} token address
  * @param {string} account address
  * @return {Promise<string>}
  */
-export const getTokenBalance = async (token: any, account: any) => {
-  if (account === "") return "0";
-  const tokenContract = new Contract(token, titaniumAbi, await getProvider());
+ export const getTokenBalance = async (token: any, account: any) => {
+   if (account === "") return "0";
+  const tokenContract = new Contract(token, titaniumAbi, provider);
   return tokenContract.balanceOf(account);
 };
 
 export const getTokenTotalSupply = async (token: any) => {
-  const tokenContract = new Contract(token, titaniumAbi, await getProvider());
+  const tokenContract = new Contract(token, titaniumAbi, await provider);
   return tokenContract.totalSupply();
 };
-
 /**
  *
  * @param {string} token
@@ -56,7 +62,7 @@ export const getTokenAllowance = async (
   account: any,
   spender: any
 ) => {
-  const tokenContract = new Contract(token, titaniumAbi, await getProvider());
+  const tokenContract = new Contract(token, titaniumAbi, provider);
   return tokenContract.allowance(account, spender);
 };
 
@@ -70,7 +76,7 @@ export const getTokenAllowance = async (
  */
 export const getBalanceBonded = async (dao: any, account: any) => {
   if (account === "") return "0";
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.balanceOfBonded(account);
 };
 
@@ -81,7 +87,7 @@ export const getBalanceBonded = async (dao: any, account: any) => {
  * @return {Promise<string>}
  */
 export const getBalanceOfStaged = async (dao: any, account: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.balanceOfStaged(account);
 };
 
@@ -92,7 +98,7 @@ export const getBalanceOfStaged = async (dao: any, account: any) => {
  * @return {Promise<string>}
  */
 export const getStatusOf = async (dao: any, account: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.statusOf(account);
 };
 
@@ -103,7 +109,7 @@ export const getStatusOf = async (dao: any, account: any) => {
  * @return {Promise<string>}
  */
 export const getFluidUntil = async (dao: any, account: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.fluidUntil(account);
 };
 
@@ -114,7 +120,7 @@ export const getFluidUntil = async (dao: any, account: any) => {
  * @return {Promise<string>}
  */
 export const getLockedUntil = async (dao: any, account: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.lockedUntil(account);
 };
 
@@ -124,7 +130,7 @@ export const getLockedUntil = async (dao: any, account: any) => {
  * @return {Promise<string>}
  */
 export const getEpoch = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.epoch();
 };
 
@@ -134,7 +140,7 @@ export const getEpoch = async (dao: any) => {
  * @return {Promise<string>}
  */
 export const getEpochTime = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.epochTime();
 };
 
@@ -144,7 +150,7 @@ export const getEpochTime = async (dao: any) => {
  * @return {Promise<string>}
  */
 export const getTotalDebt = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.totalDebt();
 };
 
@@ -154,7 +160,7 @@ export const getTotalDebt = async (dao: any) => {
  * @return {Promise<string>}
  */
 export const getTotalRedeemable = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.totalRedeemable();
 };
 
@@ -164,7 +170,7 @@ export const getTotalRedeemable = async (dao: any) => {
  * @return {Promise<string>}
  */
 export const getTotalCoupons = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.totalCoupons();
 };
 
@@ -174,7 +180,7 @@ export const getTotalCoupons = async (dao: any) => {
  * @return {Promise<string>}
  */
 export const getTotalCouponsUnderlying = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.totalCouponUnderlying();
 };
 
@@ -184,7 +190,7 @@ export const getTotalCouponsUnderlying = async (dao: any) => {
  * @return {Promise<string>}
  */
 export const getTotalBonded = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.totalBonded();
 };
 
@@ -194,7 +200,7 @@ export const getTotalBonded = async (dao: any) => {
  * @return {Promise<string>}
  */
 export const getTotalStaged = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.totalStaged();
 };
 
@@ -205,7 +211,7 @@ export const getTotalStaged = async (dao: any) => {
  * @return {Promise<string>}
  */
 export const getTotalBondedAt = async (dao: any, epoch: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.totalBondedAt(epoch);
 };
 
@@ -216,7 +222,7 @@ export const getTotalBondedAt = async (dao: any, epoch: any) => {
  * @return {Promise<string>}
  */
 export const getApproveFor = async (dao: any, candidate: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.approveFor(candidate);
 };
 
@@ -227,7 +233,7 @@ export const getApproveFor = async (dao: any, candidate: any) => {
  * @return {Promise<string>}
  */
 export const getRejectFor = async (dao: any, candidate: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.rejectFor(candidate);
 };
 
@@ -238,7 +244,7 @@ export const getRejectFor = async (dao: any, candidate: any) => {
  * @return {Promise<string>}
  */
 export const getStartFor = async (dao: any, candidate: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.startFor(candidate);
 };
 
@@ -249,7 +255,7 @@ export const getStartFor = async (dao: any, candidate: any) => {
  * @return {Promise<string>}
  */
 export const getPeriodFor = async (dao: any, candidate: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.periodFor(candidate);
 };
 
@@ -260,7 +266,7 @@ export const getPeriodFor = async (dao: any, candidate: any) => {
  * @return {Promise<boolean>}
  */
 export const getIsInitialized = async (dao: any, candidate: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.isInitialized(candidate);
 };
 
@@ -276,7 +282,7 @@ export const getRecordedVote = async (
   account: any,
   candidate: any
 ) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.recordedVote(account, candidate);
 };
 
@@ -292,7 +298,7 @@ export const getBalanceOfCoupons = async (
   account: any,
   epoch: any
 ) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.balanceOfCoupons(account, epoch);
 };
 
@@ -326,7 +332,7 @@ export const getBalanceOfCouponsUnderlying = async (
   account: any,
   epoch: any
 ) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.balanceOfCouponUnderlying(account, epoch);
 };
 
@@ -355,7 +361,7 @@ export const getBatchBalanceOfCouponsUnderlying = async (
  * @return {Promise<string>}
  */
 export const getOutstandingCoupons = async (dao: any, epoch: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.outstandingCoupons(epoch);
 };
 
@@ -366,7 +372,7 @@ export const getOutstandingCoupons = async (dao: any, epoch: any) => {
  * @return {Promise<string>}
  */
 export const getCouponsExpiration = async (dao: any, epoch: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.couponsExpiration(epoch);
 };
 
@@ -388,7 +394,7 @@ export const getBatchCouponsExpiration = async (dao: any, epochs: any) => {
  * @return {Promise<string>}
  */
 export const getCouponPremium = async (dao: any, amount: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.couponPremium(new BigNumber(amount).toFixed());
 };
 
@@ -398,7 +404,7 @@ export const getCouponPremium = async (dao: any, amount: any) => {
  * @return {Promise<string>}
  */
 export const getImplementation = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.implementation();
 };
 
@@ -408,7 +414,7 @@ export const getImplementation = async (dao: any) => {
  * @return {Promise<string>}
  */
 export const getPool = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   return daoContract.pool();
 };
 
@@ -419,7 +425,6 @@ export const getPool = async (dao: any) => {
  * @return {Promise<any[]>}
  */
 export const getCouponEpochs = async (dao: any, account: any) => {
-  const provider = await getProvider();
   const daoContract = new Contract(dao, daoAbi, provider);
   // const block = await provider.getBlockNumber()
   const blockNumber = 16022755;
@@ -432,7 +437,6 @@ export const getCouponEpochs = async (dao: any, account: any) => {
     blockNumber
   );
   const [bought, given] = await Promise.all([purchaseP, transferP]);
-  console.log(bought, given);
   const events = bought
     .map((e: any) => ({
       account: e.args.account,
@@ -477,7 +481,7 @@ export const getCouponEpochs = async (dao: any, account: any) => {
  * @return {Promise<any[]>}
  */
 export const getAllProposals = async (dao: any) => {
-  const daoContract = new Contract(dao, daoAbi, await getProvider());
+  const daoContract = new Contract(dao, daoAbi, provider);
   const payload = (
     await daoContract.getPastEvents("Proposal", {
       fromBlock: 0,
@@ -496,7 +500,6 @@ export const getAllProposals = async (dao: any) => {
  * @return {Promise<any[]>}
  */
 export const getAllRegulations = async (dao: any) => {
-  const provider = await getProvider();
   const daoContract = new Contract(dao, daoAbi, provider);
   const block = await provider.getBlockNumber();
   const blockNumber = block - 3000;
@@ -537,40 +540,8 @@ export const getAllRegulations = async (dao: any) => {
   return events.sort((a, b) => b.data.epoch - a.data.epoch);
 };
 
-// Uniswap Protocol
-
-export const getCost = async (amount: any) => {
-  const exchange = new Contract(
-    UniswapV2Router02,
-    uniswapRouterAbi,
-    await getProvider()
-  );
-  // eslint-disable-next-line no-unused-vars
-  const [inputAmount, _] = await exchange.getAmountsIn(
-    new BigNumber(amount).toFixed(),
-    [USDC.addr, ESD.addr]
-  );
-
-  return inputAmount;
-};
-
-export const getProceeds = async (amount: any) => {
-  const exchange = new Contract(
-    UniswapV2Router02,
-    uniswapRouterAbi,
-    await getProvider()
-  );
-  // eslint-disable-next-line no-unused-vars
-  const [_, outputAmount] = await exchange.getAmountsOut(
-    new BigNumber(amount).toFixed(),
-    [ESD.addr, USDC.addr]
-  );
-
-  return outputAmount;
-};
-
 export const getReserves = async () => {
-  const exchange = new Contract(UNI.addr, metapoolAbi, await getProvider());
+  const exchange = new Contract(UNI.addr, metaPoolAbi, provider);
   try {
     return await exchange.get_balances();
   } catch (error) {
@@ -581,8 +552,8 @@ export const getReserves = async () => {
 export const getThreeCRVPrice = async () => {
   const threePool = new Contract(
     "0x1337bedc9d22ecbe766df105c9623922a27963ec",
-    metapoolAbi,
-    await getProvider()
+    metaPoolAbi,
+    await provider
   );
   try {
     return await threePool.get_virtual_price();
@@ -592,19 +563,23 @@ export const getThreeCRVPrice = async () => {
 };
 
 export const getInstantaneousPrice = async () => {
-  const provider = await getProvider();
-  const exchange = new Contract(UNI.addr, metapoolAbi, provider);
-  const threePool = new Contract("0x1337bedc9d22ecbe766df105c9623922a27963ec", metapoolAbi, provider);
+  const exchange = new Contract(UNI.addr, metaPoolAbi, provider);
+  const threePool = new Contract(
+    "0x1337bedc9d22ecbe766df105c9623922a27963ec",
+    metaPoolAbi,
+    provider
+  );
 
   try {
     const [threeCRVPrice, TPrice] = await Promise.all([
       threePool.get_virtual_price(),
-      exchange.get_dy(0, 1, parseEther("1"))
+      exchange.get_dy(0, 1, parseEther("1")),
     ]);
 
     const price = toTokenUnitsBN(threeCRVPrice, USDC.decimals)?.multipliedBy(
       toTokenUnitsBN(TPrice, USDC.decimals)
     );
+
     return price;
   } catch (error) {
     console.log(error);
@@ -612,14 +587,14 @@ export const getInstantaneousPrice = async () => {
 };
 
 export const getToken0 = async () => {
-  const exchange = new Contract(UNI.addr, metapoolAbi, await getProvider());
+  const exchange = new Contract(UNI.addr, metaPoolAbi, provider);
   return exchange.coins(0);
 };
 
 // Pool
 
 export const getPoolStatusOf = async (pool: any, account: any) => {
-  const poolContract = new Contract(pool, poolAbi, await getProvider());
+  const poolContract = new Contract(pool, poolAbi, provider);
   return poolContract.statusOf(account);
 };
 
@@ -631,7 +606,7 @@ export const getPoolStatusOf = async (pool: any, account: any) => {
  */
 export const getPoolBalanceOfBonded = async (pool: any, account: any) => {
   if (account === "") return "0";
-  const poolContract = new Contract(pool, poolAbi, await getProvider());
+  const poolContract = new Contract(pool, poolAbi, provider);
   return poolContract.balanceOfBonded(account);
 };
 
@@ -642,7 +617,7 @@ export const getPoolBalanceOfBonded = async (pool: any, account: any) => {
  * @return {Promise<string>}
  */
 export const getPoolBalanceOfStaged = async (pool: any, account: any) => {
-  const poolContract = new Contract(pool, poolAbi, await getProvider());
+  const poolContract = new Contract(pool, poolAbi, provider);
   return poolContract.balanceOfStaged(account);
 };
 
@@ -653,7 +628,7 @@ export const getPoolBalanceOfStaged = async (pool: any, account: any) => {
  * @return {Promise<string>}
  */
 export const getPoolBalanceOfRewarded = async (pool: any, account: any) => {
-  const poolContract = new Contract(pool, poolAbi, await getProvider());
+  const poolContract = new Contract(pool, poolAbi, provider);
   return poolContract.balanceOfRewarded(account);
 };
 
@@ -664,7 +639,7 @@ export const getPoolBalanceOfRewarded = async (pool: any, account: any) => {
  * @return {Promise<string>}
  */
 export const getPoolBalanceOfClaimable = async (pool: any, account: any) => {
-  const poolContract = new Contract(pool, poolAbi, await getProvider());
+  const poolContract = new Contract(pool, poolAbi, provider);
   return poolContract.balanceOfClaimable(account);
 };
 
@@ -675,7 +650,7 @@ export const getPoolBalanceOfClaimable = async (pool: any, account: any) => {
  * @return {Promise<string>}
  */
 export const getPoolTotalBonded = async (pool: any) => {
-  const poolContract = new Contract(pool, poolAbi, await getProvider());
+  const poolContract = new Contract(pool, poolAbi, provider);
   return poolContract.totalBonded();
 };
 
@@ -686,7 +661,7 @@ export const getPoolTotalBonded = async (pool: any) => {
  * @return {Promise<string>}
  */
 export const getPoolTotalRewarded = async (pool: any) => {
-  const poolContract = new Contract(pool, poolAbi, await getProvider());
+  const poolContract = new Contract(pool, poolAbi, provider);
   return poolContract.totalRewarded();
 };
 
@@ -697,7 +672,7 @@ export const getPoolTotalRewarded = async (pool: any) => {
  * @return {Promise<string>}
  */
 export const getPoolTotalClaimable = async (pool: any) => {
-  const poolContract = new Contract(pool, poolAbi, await getProvider());
+  const poolContract = new Contract(pool, poolAbi, provider);
   return poolContract.totalClaimable();
 };
 
@@ -708,7 +683,7 @@ export const getPoolTotalClaimable = async (pool: any) => {
  * @return {Promise<string>}
  */
 export const getPoolFluidUntil = async (pool: any, account: any) => {
-  const poolContract = new Contract(pool, poolAbi, await getProvider());
+  const poolContract = new Contract(pool, poolAbi, provider);
 
   const fluidUntil = await poolContract.fluidUntil(account);
 
@@ -738,7 +713,7 @@ export const getPoolYield = async () => {
   ]);
 
   return tPrice
-    .times(new BigNumber(formatEther(regs[0].data.newBonded)).div(2))
+    .times(new BigNumber(formatEther(regs.length !== 0 ? regs[0]?.data.newBonded : 0)).div(2))
     .div(tvl)
     .times(100);
 };

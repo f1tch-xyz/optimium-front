@@ -58,7 +58,7 @@ function WithdrawDeposit({
                                             />
                                             <MaxButton
                                                 onClick={() => {
-                                                    setDepositAmount(balance)
+                                                    setDepositAmount(balance);
                                                 }}
                                             />
                                         </>

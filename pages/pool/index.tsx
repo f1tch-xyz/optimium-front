@@ -69,7 +69,8 @@ const Pool = ({ user }: { user: string }) => {
             setLegacyUserStatus(0)
             return
         }
-        let isCancelled = false
+
+        let isCancelled = false;
 
         async function updateUserInfo() {
             try {
