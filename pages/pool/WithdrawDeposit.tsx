@@ -57,7 +57,7 @@ function WithdrawDeposit({
                                     <div style={{ width: '60%', minWidth: '6em' }}>
                                         <>
                                             <BigNumberInput
-                                                adornment="T-3CRV"
+                                                adornment="OD-3CRV"
                                                 value={depositAmount}
                                                 setter={setDepositAmount}
                                                 disabled={status !== 0}
@@ -91,7 +91,7 @@ function WithdrawDeposit({
                                     <div style={{ width: '60%', minWidth: '6em' }}>
                                         <>
                                             <BigNumberInput
-                                                adornment="T-3CRV"
+                                                adornment="OD-3CRV"
                                                 value={withdrawAmount}
                                                 setter={setWithdrawAmount}
                                                 disabled={status !== 0}
@@ -129,7 +129,7 @@ function WithdrawDeposit({
                             <BalanceBlock
                                 asset="Staged"
                                 balance={stagedBalance}
-                                suffix={'T-3CRV'}
+                                suffix={'OD-3CRV'}
                             />
                         </div>
                         <div style={{ flexBasis: '35%' }} />

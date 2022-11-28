@@ -32,7 +32,7 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
                     {/* Total bonded */}
                     <div style={{ display: 'flex' }}>
                         <div style={{ whiteSpace: 'nowrap' }}>
-                            <BalanceBlock asset="Bonded" balance={bonded} suffix={'T'} />
+                            <BalanceBlock asset="Bonded" balance={bonded} suffix={'OD'} />
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -75,7 +75,7 @@ function BondUnbond({ staged, bonded, status, lockup }: BondUnbondProps) {
                                 <div style={{ width: '60%', minWidth: '6em' }}>
                                     <>
                                         <BigNumberInput
-                                            adornment="T"
+                                            adornment="OD"
                                             value={unbondAmount}
                                             setter={setUnbondAmount}
                                         />

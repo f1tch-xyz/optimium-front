@@ -14,6 +14,8 @@ import titanium from "../constants/abi/titanium.json";
 import metaPool from "../constants/abi/metaPool.json";
 import pool from "../constants/abi/pool.json";
 import dao from "../constants/abi/dao.json";
+import { selectError, show } from '../store/errorSlice'
+import { useAppDispatch } from '../store/hooks'
 
 let uniswapRouterAbi = uniswapV2Router02.abi;
 let titaniumAbi = titanium.abi;
@@ -21,10 +23,11 @@ let daoAbi = dao.abi;
 let poolAbi = pool.abi;
 let metapoolAbi = metaPool.abi as any;
 
+// const dispatch = useAppDispatch();
+// const error = useAppSelector(selectError);
 
 const DEADLINE_FROM_NOW = 60 * 15
-const UINT256_MAX =
-  '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+const UINT256_MAX = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
 
 /**
  * Connection Utilities
@@ -280,6 +283,7 @@ export const bond = async (dao: any, amount: any) => {
     const tx = await daoContract.bond(new BigNumber(amount).toFixed())
     // notify.hash(tx.hash)
     // callback(tx.hash)
+    // dispatch(show());
   } catch (error) {
     console.log(error)
   }
@@ -381,8 +385,18 @@ export const commit = async (dao: any, candidate: any) => {
 
 /* UNI-V2 Incentivization Pool */
 export const depositPool = async (pool: any, amount: any, callback: any) => {
+  console.log('pool', pool);
+  console.log('amount', amount);
+
   const { account, signer } = await checkConnectedAndGetAddress()
+
+  console.log('account', account);
+  console.log('signer', signer);
+  
   const poolContract = new Contract(pool, poolAbi, signer)
+
+  console.log('poolContract', poolContract);
+  
 
   try {
     const tx = await poolContract.deposit(new BigNumber(amount).toFixed())
@@ -464,3 +478,4 @@ export const providePool = async (pool: any, amount: any, callback: any) => {
     console.log(error)
   }
 }
+

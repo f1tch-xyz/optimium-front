@@ -4,7 +4,6 @@ import {DollarPool1, DollarPool2, DollarPool3, DollarPool4} from "../constants/c
 
 export async function getPoolAddress(): Promise<string> {
   const pool = await getPool(ESDS.addr);
-  
   if (pool.toLowerCase() === DollarPool2.toLowerCase()) {
     return DollarPool2;
   }

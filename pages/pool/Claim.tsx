@@ -30,7 +30,7 @@ function Claim({ poolAddress, claimable, status }: ClaimProps) {
                 <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
                     {/* total Issued */}
                     <div style={{ flexBasis: '32%' }}>
-                        <BalanceBlock asset="Claimable" balance={claimable} suffix={'T'} />
+                        <BalanceBlock asset="Claimable" balance={claimable} suffix={'OD'} />
                     </div>
                     {/* Deposit UNI-V2 into Pool */}
                     <div style={{ flexBasis: '35%' }} />
@@ -39,7 +39,7 @@ function Claim({ poolAddress, claimable, status }: ClaimProps) {
                             <div style={{ width: '60%', minWidth: '6em' }}>
                                 <>
                                     <BigNumberInput
-                                        adornment="T"
+                                        adornment="OD"
                                         value={claimAmount}
                                         setter={setClaimAmount}
                                         disabled={status !== 0}

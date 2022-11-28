@@ -56,7 +56,7 @@ const RegulationHeader = ({
                             SUPPLY ALLOCATION
                         </Box>
                         <Distribution
-                            heading={`T ${formatMoney(totalSupply?.toNumber())}`}
+                            heading={`OD ${formatMoney(totalSupply?.toNumber())}`}
                             items={[
                                 {
                                     item: 'Forge',
@@ -80,7 +80,7 @@ const RegulationHeader = ({
                             FORGE BREAKDOWN
                         </Box>
                         <Distribution
-                            heading={`T ${formatMoney(daoTotalSupply?.toNumber())}`}
+                            heading={`OD ${formatMoney(daoTotalSupply?.toNumber())}`}
                             items={[
                                 {
                                     item: 'Bonded',
@@ -104,7 +104,7 @@ const RegulationHeader = ({
                             POOL BREAKDOWN
                         </Box>
                         <Distribution
-                            heading={`T ${formatMoney(poolTotalSupply?.toNumber())}`}
+                            heading={`OD ${formatMoney(poolTotalSupply?.toNumber())}`}
                             items={[
                                 {
                                     item: 'Liquidity',

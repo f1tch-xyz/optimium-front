@@ -8,4 +8,4 @@ export const COUPON_EXPIRATION = 8640
 export const DAO_EXIT_LOCKUP_EPOCHS = 240
 export const POOL_EXIT_LOCKUP_EPOCHS = 144
 export const EPOCH_START = 1667790000
-export const POOL = '0xf6114a12b77f671e5a7d8ec87b2f04ff222fec15'
+export const POOL = '0xc2d92D8DA97bC39b097f7BeAeB24D149C6FC35A0'

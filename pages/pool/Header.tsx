@@ -39,21 +39,21 @@ const PoolPageHeader = ({
                 <BalanceBlock
                     asset="Balance"
                     balance={accountUNIBalance}
-                    suffix={' T-3CRV'}
+                    suffix={' OD-3CRV'}
                 />
             </div>
             <div className={styles.header_content}>
                 <BalanceBlock
                     asset="Rewarded"
                     balance={accountRewardedESDBalance}
-                    suffix={' T'}
+                    suffix={' OD'}
                 />
             </div>
             <div className={styles.header_content}>
                 <BalanceBlock
                     asset="Claimable"
                     balance={accountClaimableESDBalance}
-                    suffix={' T'}
+                    suffix={' OD'}
                 />
             </div>
             <div className={styles.header_content}>

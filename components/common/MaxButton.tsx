@@ -7,7 +7,7 @@ function MaxButton({ onClick }: { onClick: Function }) {
         <>
             {/* <Button sx={{ padding: 0, border: 'none!important' }} onClick={() => onClick}> */}
             <Box pt={1}>
-                <span onClick={() => onClick} style={{ opacity: 0.5, cursor: 'pointer' }}> Max </span>
+                <span onClick={() => onClick()} style={{ opacity: 0.5, cursor: 'pointer' }}> Max </span>
             </Box>
             {/* </Button> */}
         </>

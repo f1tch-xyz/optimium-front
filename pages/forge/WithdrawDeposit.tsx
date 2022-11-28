@@ -41,7 +41,7 @@ function WithdrawDeposit({
                         {/* total Issued */}
                         <div style={{ display: 'flex' }}>
                             <div style={{ whiteSpace: 'nowrap' }}>
-                                <BalanceBlock asset="Staged" balance={stagedBalance} suffix={'T'} />
+                                <BalanceBlock asset="Staged" balance={stagedBalance} suffix={'OD'} />
                             </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', width: '60%' }}>
@@ -58,7 +58,7 @@ function WithdrawDeposit({
                                             />
                                             <MaxButton
                                                 onClick={() => {
-                                                    setDepositAmount(balance)
+                                                    setDepositAmount(balance);
                                                 }}
                                             />
                                         </>
@@ -87,7 +87,7 @@ function WithdrawDeposit({
                                     <div style={{ width: '54%', minWidth: '6em' }}>
                                         <>
                                             <BigNumberInput
-                                                adornment="T"
+                                                adornment="OD"
                                                 value={withdrawAmount}
                                                 setter={setWithdrawAmount}
                                                 disabled={status !== 0}
@@ -123,7 +123,7 @@ function WithdrawDeposit({
                     <div className={styles.wrapper}>
                         {/* total Issued */}
                         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', flexBasis: '32%' }}>
-                            <BalanceBlock asset="Staged" balance={stagedBalance} suffix={'T'} />
+                            <BalanceBlock asset="Staged" balance={stagedBalance} suffix={'OD'} />
                         </div>
                         <div style={{ flexBasis: '35%' }} />
                         {/* Approve DAO to spend Døllar */}
@@ -141,7 +141,7 @@ function WithdrawDeposit({
                 )}
                 <div style={{ width: '100%', paddingTop: '2%', marginBottom: '5px', textAlign: 'center' }}>
                     <span style={{ opacity: 0.5 }}>
-                        Get your T tokens{' '}
+                        Get your OD tokens{' '}
                         <a
                             href="https://curve.fi/#/ethereum/pools/factory-v2-229/swap"
                             target="_blank"
