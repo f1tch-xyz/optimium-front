@@ -11,7 +11,7 @@ function AddressBlock({ label, address }: AddressBlockProps) {
             <div style={{ fontSize: 16, padding: 3 }}>{label}</div>
             <div style={{ padding: 5 }}>
                 <a
-                    href={`https://etherscan.io/address/${address}`}
+                    href={`https://optimistic.etherscan.io/address/${address}`}
                     target="_blank"
                     rel="noreferrer"
                 >

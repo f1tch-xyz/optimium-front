@@ -61,7 +61,7 @@ const UniswapPool = ({ user }: { user: string }) => {
 
             <div className={styles.box_container}>
                 <Box mr={2} sx={{ height: '200px', border: '1px solid', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-                    <a href="https://curve.fi/#/ethereum/pools/factory-v2-229/swap">
+                    <a href="https://curve.fi/#/optimism/pools/factory-v2-38/swap">
                         <div className={styles.title}>
                             Info
                         </div>
@@ -75,7 +75,7 @@ const UniswapPool = ({ user }: { user: string }) => {
                 </Box>
 
                 <Box sx={{ height: '200px', border: '1px solid', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-                    <a href="https://curve.fi/#/ethereum/pools/factory-v2-229/swap">
+                    <a href="https://curve.fi/#/optimism/pools/factory-v2-38/swap">
                         <div className={styles.title}>
                             Trade
                         </div>
@@ -89,7 +89,7 @@ const UniswapPool = ({ user }: { user: string }) => {
                 </Box>
 
                 <Box ml={2} sx={{ height: '200px', border: '1px solid black', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-                    <a href="https://curve.fi/#/ethereum/pools/factory-v2-229/deposit">
+                    <a href="https://curve.fi/#/optimism/pools/factory-v2-38/deposit">
                         <div className={styles.title}>
                             Supply
                         </div>
